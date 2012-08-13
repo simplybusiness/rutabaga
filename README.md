@@ -18,7 +18,7 @@ Or add it to your Gemfile and run `bundle`.
 
 ``` ruby
 group :test do
-  gem "rutabaga"
+  gem "rutabaga", :git => 'git://github.com/simplybusiness/rutabaga.git'
 end
 ```
 
