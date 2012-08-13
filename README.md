@@ -36,6 +36,17 @@ require 'turnip/capybara'
 Dir.glob("spec/features/step_definitions/**/*_steps.rb") { |f| load f, true }
 ```
 
+In order to get `rake` or `bundle exec rake` to work properly, you might need to add this in the file `lib/tasks/rspec.rake` (at least for rails)
+
+```
+if defined? RSpec # otherwise fails on non-live environments
+  desc "Run all specs/features in spec directory"
+  RSpec::Core::RakeTask.new(:spec => 'db:test:prepare') do |t|
+    t.pattern = './spec/{**/*_spec.rb,features/**/*.feature}'
+  end
+end
+```
+
 ## Usage
 
 ### Running a feature file from a spec file
