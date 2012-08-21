@@ -11,8 +11,21 @@ describe 'integration', :type => :integration do
     @result.should include('my result is 4')
   end
 
+  it "should not show any pending steps" do
+  	@result.should_not include('PENDING')
+  	@result.should_not include('No such step')
+  end
+
   it "prints out failures and successes" do
-    @result.should include('2 examples, 0 failures')
+    @result.should include('4 examples, 1 failure')
+  end
+
+  it "should find features relative to the root" do
+  	@result.should_not include('Feature file not found')
+  end
+
+  it "should scope steps to describe blocks" do
+  	@result.should_not include('Turnip::Ambiguous')
   end
 
 end
