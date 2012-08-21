@@ -17,7 +17,7 @@ describe 'integration', :type => :integration do
   end
 
   it "prints out failures and successes" do
-    @result.should include('4 examples, 1 failure')
+    @result.should include('5 examples, 1 failure')
   end
 
   it "should find features relative to the root" do
