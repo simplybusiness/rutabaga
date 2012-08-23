@@ -5,8 +5,8 @@ Gem::Specification.new do |gem|
   gem.authors       = ['Lukas Oberhuber']
   gem.email         = ['lukas.oberhuber@simplybusiness.co.uk']
   gem.description   = %q{Allows using feature from within RSpec and is built on top of Turnip}
-  gem.summary       = %q{Calling feature files from Turnip}
-  gem.homepage      = ''
+  gem.summary       = %q{Calling Turnip feature files from RSpec, which allows encapsulating a feature inside a describe block}
+  gem.homepage      = 'https://github.com/simplybusiness/rutabaga'
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
