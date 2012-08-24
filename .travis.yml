@@ -4,6 +4,6 @@ rvm:
   - 1.9.3
   # Gherkin currently failing to build in ruby-head
   # - ruby-head
-  - rbx-19mode
+  # - rbx-19mode
 
 script: bundle exec rspec spec
