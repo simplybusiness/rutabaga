@@ -6,6 +6,11 @@ module Rutabaga
       feature_file = find_feature
 
       rspec_class = self.class
+
+      # Hack turnip into the rspec only when needed
+      rspec_class.send(:include, Turnip::RSpec::Execute)
+      rspec_class.send(:include, Turnip::Steps)
+
       builder = Turnip::Builder.build(feature_file)
       builder.features.each do |feature|
         rspec_class.describe(feature.name, feature.metadata_hash) do
