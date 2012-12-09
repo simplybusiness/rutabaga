@@ -6,6 +6,11 @@ module Rutabaga
       feature_file = find_feature
 
       rspec_class = self.class
+
+      # Hack turnip into the rspec only when needed
+      rspec_class.send(:include, Turnip::RSpec::Execute)
+      rspec_class.send(:include, Turnip::Steps)
+
       builder = Turnip::Builder.build(feature_file)
       builder.features.each do |feature|
         rspec_class.describe(feature.name, feature.metadata_hash) do
@@ -43,9 +48,6 @@ module Rutabaga
 end
 
 ::RSpec.configure do |c|
-  # Ensures turnip still works on all tests, as is no longer included by default in turnip
-  c.include Turnip::RSpec::Execute
-  c.include Turnip::Steps
   c.include Rutabaga::Feature
   # Blow away turnip's pattern, and focus just on features directory
   c.pattern.gsub!(",**/*.feature", ",features/**/*.feature")
