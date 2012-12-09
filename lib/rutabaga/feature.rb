@@ -43,6 +43,9 @@ module Rutabaga
 end
 
 ::RSpec.configure do |c|
+  # Ensures turnip still works on all tests, as is no longer included by default in turnip
+  c.include Turnip::RSpec::Execute
+  c.include Turnip::Steps
   c.include Rutabaga::Feature
   # Blow away turnip's pattern, and focus just on features directory
   c.pattern.gsub!(",**/*.feature", ",features/**/*.feature")
