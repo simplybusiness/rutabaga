@@ -9,23 +9,26 @@ describe 'integration', :type => :integration do
     @result.should include('ensures the feature is called')
     @result.should include('that 2 + 2 is calculated')
     @result.should include('my result is 4')
+
+    @result.should include('that 2 * 4 is calculated')
+    @result.should include('my result is 8')
   end
 
   it "should not show any pending steps" do
-  	@result.should_not include('PENDING')
-  	@result.should_not include('No such step')
+    @result.should_not include('PENDING')
+    @result.should_not include('No such step')
   end
 
   it "prints out failures and successes" do
-    @result.should include('6 examples, 1 failure')
+    @result.should include('8 examples, 1 failure')
   end
 
   it "should find features relative to the root" do
-  	@result.should_not include('Feature file not found')
+    @result.should_not include('Feature file not found')
   end
 
   it "should scope steps to describe blocks" do
-  	@result.should_not include('Turnip::Ambiguous')
+    @result.should_not include('Turnip::Ambiguous')
   end
 
 end
