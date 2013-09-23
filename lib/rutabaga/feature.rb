@@ -2,8 +2,7 @@ require 'turnip'
 
 module Rutabaga
   module Feature
-    def feature
-      feature_file = find_feature
+    def feature(feature_file = find_feature)
 
       rspec_class = self.class
 
