@@ -47,6 +47,8 @@ module Rutabaga
 
     private
 
+    # For compatibility with rspec 2 and rspec 3. RSpec.current_example was added late in
+    # the rspec 2 cycle.
     def get_example
       begin
         RSpec.current_example

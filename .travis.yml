@@ -11,4 +11,26 @@ gemfile:
   - Gemfile_turnip_1_1_0
   - Gemfiles_rspec_2_7
 
+# Run the full suite against ruby 2.0.0 only
+matrix:
+  exclude:
+    - rvm: 1.9.3
+      gemfile: Gemfile_turnip_1_1_0_rspec_2
+    - rvm: 2.1.0
+      gemfile: Gemfile_turnip_1_1_0_rspec_2
+    - rvm: jruby-19mode
+      gemfile: Gemfile_turnip_1_1_0_rspec_2
+    - rvm: 1.9.3
+      gemfile: Gemfile_turnip_1_1_0
+    - rvm: 2.1.0
+      gemfile: Gemfile_turnip_1_1_0
+    - rvm: jruby-19mode
+      gemfile: Gemfile_turnip_1_1_0
+    - rvm: 1.9.3
+      gemfile: Gemfiles_rspec_2_7
+    - rvm: 2.1.0
+      gemfile: Gemfiles_rspec_2_7
+    - rvm: jruby-19mode
+      gemfile: Gemfiles_rspec_2_7
+
 script: bundle exec rspec spec
