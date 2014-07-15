@@ -1,5 +1,0 @@
-# Use global Gemfile and customize
-eval(IO.read('Gemfile'), binding)
-
-# Avoid deprecation warnings for rspec 2.99
-gem 'rspec', '~>2.7', '<2.99'
