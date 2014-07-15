@@ -49,9 +49,9 @@ module Rutabaga
 
     def get_example
       begin
-        example
-      rescue NameError => e
         RSpec.current_example
+      rescue NameError => e
+        example
       end
     end
   end

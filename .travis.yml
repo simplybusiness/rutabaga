@@ -1,9 +1,14 @@
 language: ruby
 rvm:
-  - 1.9.2
   - 1.9.3
-  # Gherkin currently failing to build in ruby-head
-  # - ruby-head
-  - rbx-19mode
+  - 2.0.0
+  - 2.1.0
+  - jruby-19mode
+
+gemfile:
+  - Gemfile
+  - Gemfile_turnip_1_1_0_rspec_2
+  - Gemfile_turnip_1_1_0
+  - Gemfiles_rspec_2
 
 script: bundle exec rspec spec
