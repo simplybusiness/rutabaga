@@ -27,10 +27,10 @@ matrix:
     - rvm: jruby-19mode
       gemfile: Gemfile_turnip_1_1_0
     - rvm: 1.9.3
-      gemfile: Gemfiles_rspec_2_7
+      gemfile: Gemfile_rspec_2_7
     - rvm: 2.1.0
-      gemfile: Gemfiles_rspec_2_7
+      gemfile: Gemfile_rspec_2_7
     - rvm: jruby-19mode
-      gemfile: Gemfiles_rspec_2_7
+      gemfile: Gemfile_rspec_2_7
 
 script: bundle exec rspec spec
