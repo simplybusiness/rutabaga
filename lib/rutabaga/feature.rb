@@ -16,7 +16,7 @@ module Rutabaga
         rspec_class.describe(feature.name, feature.metadata_hash) do
           rspec_class.before do
             # This is kind of a hack, but it will make RSpec throw way nicer exceptions
-            example.metadata[:file_path] = feature_file
+            get_example.metadata[:file_path] = feature_file
 
             feature.backgrounds.map(&:steps).flatten.each do |step|
               run_step(feature_file, step)
@@ -36,13 +36,25 @@ module Rutabaga
     end
 
     def find_feature
-      return example.description if File.exists?(example.description)
+      return get_example.description if File.exists?(get_example.description)
 
       spec_file = caller(2).first.split(':').first
       feature_file = spec_file.gsub(/_spec.rb\Z/, '.feature')
       return feature_file if File.exists?(feature_file)
 
-      raise "Feature file not found. Tried: #{example.description} and #{feature_file}"
+      raise "Feature file not found. Tried: #{get_example.description} and #{feature_file}"
+    end
+
+    private
+
+    # For compatibility with rspec 2 and rspec 3. RSpec.current_example was added late in
+    # the rspec 2 cycle.
+    def get_example
+      begin
+        RSpec.current_example
+      rescue NameError => e
+        example
+      end
     end
   end
 end
