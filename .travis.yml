@@ -9,7 +9,7 @@ gemfile:
   - Gemfile
   - Gemfile_turnip_1_1_0_rspec_2
   - Gemfile_turnip_1_1_0
-  - Gemfiles_rspec_2_7
+  - Gemfile_rspec_2_7
 
 # Run the full suite against ruby 2.0.0 only
 matrix:
