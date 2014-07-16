@@ -1,0 +1,5 @@
+# Use global Gemfile and customize
+eval(IO.read('Gemfile'), binding)
+
+# Test lowest supported version of rspec
+gem 'rspec', '~>2.7.0'

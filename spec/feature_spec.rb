@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'integration', :type => :integration do
   before do
-    @result = %x(rspec -r rutabaga -fs examples/*_spec.rb)
+    @result = %x(rspec -r rutabaga -fd examples/*_spec.rb)
   end
 
   it "shows the correct description" do
