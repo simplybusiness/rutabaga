@@ -37,8 +37,9 @@ module Rutabaga
     def find_feature
       return get_example.description if File.exists?(get_example.description)
 
-      spec_file = caller(2).first.split(':').first
-      feature_file = spec_file.gsub(/_spec.rb\Z/, '.feature')
+      feature_file = caller(0).find do |call|
+        call =~ /_spec.rb:/
+      end.gsub(/_spec.rb:.*\Z/, '.feature')
       return feature_file if File.exists?(feature_file)
 
       raise "Feature file not found. Tried: #{get_example.description} and #{feature_file}"
