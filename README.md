@@ -1,6 +1,6 @@
 # Rutabaga
 
-Turnip hacks to enable running turnips from inside spec files, rather than outside.
+[Turnip](https://github.com/jnicklas/turnip) hacks to enable running turnips from inside spec files, rather than outside.
 
 Rutabaga allows you to invert the control of feature files, so that features are called from your `_spec.rb` files rather than the other way around. Step definitions are then put into the `_spec.rb` files as well. The steps are then scoped to that particular test.
 
@@ -82,6 +82,38 @@ end
 ```
 
 Will run `spec/features/test.feature`.
+
+Second alternative, is specifying the feature file in the `feature` command:
+
+```ruby
+it "should run the feature" do
+    feature "spec/features/test.feature"
+end
+```
+
+Will run `spec/features/test.feature`.
+
+### Definining steps
+
+Steps are defined in the same way as in Turnip, however, steps can be defined within the rspec context and are scoped to only be available there.
+
+```ruby
+describe "step will only be in this context" do
+  it "should run feature" do
+    feature
+  end
+
+  step "action :named" do |named| do
+    expect(named).to eq("a name")
+  end
+end
+
+describe "step 'action :named' is not available here" do
+  it "cannot run feature due to missing step" do
+    expect(feature).to raise_error
+  end
+end
+```
 
 ### Differences from Turnip
 

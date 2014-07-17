@@ -1,5 +1,7 @@
 *.gem
 *.rbc
+*.lock
+.ruby-version
 .bundle
 .config
 .yardoc
