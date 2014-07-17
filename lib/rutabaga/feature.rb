@@ -51,9 +51,9 @@ module Rutabaga
     # the rspec 2 cycle.
     def get_example
       begin
-        RSpec.current_example
+        @example ||= RSpec.current_example
       rescue NameError => e
-        example
+        @example ||= example
       end
     end
   end
