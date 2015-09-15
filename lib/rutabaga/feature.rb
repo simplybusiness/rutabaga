@@ -10,28 +10,18 @@ module Rutabaga
       rspec_class.send(:include, Turnip::RSpec::Execute)
       rspec_class.send(:include, Turnip::Steps)
 
-      builder = Turnip::Builder.build(feature_file)
-      builder.features.each do |feature|
-        rspec_class.describe(feature.name, feature.metadata_hash) do
-          rspec_class.before do
-            # This is kind of a hack, but it will make RSpec throw way nicer exceptions
-            get_example.metadata[:file_path] = feature_file
-
-            feature.backgrounds.map(&:steps).flatten.each do |step|
-              run_step(feature_file, step)
-            end
-          end
-          feature.scenarios.each do |scenario|
-            rspec_class.describe(scenario.name, scenario.metadata_hash) do
-              it scenario.steps.map(&:description).join(' -> ') do
-                scenario.steps.each do |step|
-                  run_step(feature_file, step)
-                end
-              end
-            end
-          end
-        end
+      # Point the describe (used for creating the feature) in turnip from 
+      # RSpec to the current class so we get steps within the current 
+      # example group
+      ::RSpec.singleton_class.send(:alias_method, :real_describe, :describe)
+      ::RSpec.define_singleton_method(:new_describe) do |*args, &example_group_block|
+        rspec_class.describe(args, &example_group_block)
       end
+      ::RSpec.singleton_class.send(:alias_method, :describe, :new_describe)
+
+      Turnip::RSpec.run(feature_file)
+
+      ::RSpec.singleton_class.send(:alias_method, :describe, :real_describe)
     end
 
     def find_feature
