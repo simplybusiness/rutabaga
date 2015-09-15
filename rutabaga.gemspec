@@ -17,5 +17,5 @@ Gem::Specification.new do |gem|
   gem.license       = 'MIT'
 
   gem.add_runtime_dependency 'turnip', ['>= 1.1.0', '<2.0']
-  gem.add_development_dependency "pry"
+  gem.add_development_dependency "pry", '~> 0'
 end
