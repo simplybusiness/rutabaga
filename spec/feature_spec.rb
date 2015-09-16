@@ -6,31 +6,31 @@ describe 'integration', :type => :integration do
   end
 
   it "shows the correct description" do
-    @result.should include('ensures the feature is called')
-    @result.should include('that 2 + 2 is calculated')
-    @result.should include('my result is 4')
+    expect(@result).to include('ensures the feature is called')
+    expect(@result).to include('that 2 + 2 is calculated')
+    expect(@result).to include('my result is 4')
   end
 
   it "should not show any pending steps" do
-    @result.should_not include('PENDING')
-    @result.should_not include('No such step')
+    expect(@result).not_to include('PENDING')
+    expect(@result).not_to include('No such step')
   end
 
   it "prints out failures and successes" do
-    @result.should include('8 examples, 1 failure')
+    expect(@result).to include('10 examples, 1 failure')
   end
 
   it "should find features relative to the root" do
-    @result.should_not include('Feature file not found')
+    expect(@result).not_to include('Feature file not found')
   end
 
   it "finds the .feature file given as parameter to the 'feature' method" do
-    @result.should include('that 2 * 4 is calculated')
-    @result.should include('my result is 8')
+    expect(@result).to include('that 2 * 4 is calculated')
+    expect(@result).to include('my result is 8')
   end
 
   it "should scope steps to describe blocks" do
-    @result.should_not include('Turnip::Ambiguous')
+    expect(@result).not_to include('Turnip::Ambiguous')
   end
 
 end

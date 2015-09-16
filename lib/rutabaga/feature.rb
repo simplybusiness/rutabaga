@@ -4,24 +4,13 @@ module Rutabaga
   module Feature
     def feature(feature_file = find_feature)
 
-      rspec_class = self.class
+      example_group_class = self.class
 
       # Hack turnip into the rspec only when needed
-      rspec_class.send(:include, Turnip::RSpec::Execute)
-      rspec_class.send(:include, Turnip::Steps)
+      example_group_class.send(:include, Turnip::RSpec::Execute)
+      example_group_class.send(:include, Turnip::Steps)
 
-      # Point the describe (used for creating the feature) in turnip from 
-      # RSpec to the current class so we get steps within the current 
-      # example group
-      ::RSpec.singleton_class.send(:alias_method, :real_describe, :describe)
-      ::RSpec.define_singleton_method(:new_describe) do |*args, &example_group_block|
-        rspec_class.describe(args, &example_group_block)
-      end
-      ::RSpec.singleton_class.send(:alias_method, :describe, :new_describe)
-
-      Turnip::RSpec.run(feature_file)
-
-      ::RSpec.singleton_class.send(:alias_method, :describe, :real_describe)
+      run(feature_file, example_group_class)
     end
 
     def find_feature
@@ -36,6 +25,36 @@ module Rutabaga
     end
 
     private
+
+    # Code copied and modified from jnicklas/turnip v1.3.0
+    def run(feature_file, example_group_class)
+      Turnip::Builder.build(feature_file).features.each do |feature|
+        instance_eval <<-EOS, feature_file, feature.line
+          describe = example_group_class.describe feature.name, feature.metadata_hash
+          run_feature(describe, feature, feature_file, example_group_class)
+        EOS
+      end
+    end
+
+    def run_feature(describe, feature, filename, example_group_class)
+      example_group_class.before do
+        feature.backgrounds.map(&:steps).flatten.each do |step|
+          run_step(filename, step)
+        end
+      end
+
+      feature.scenarios.each do |scenario|
+        instance_eval <<-EOS, filename, scenario.line
+          example_group_class.describe scenario.name, scenario.metadata_hash do 
+            it(scenario.steps.map(&:to_s).join(' -> ')) do
+              scenario.steps.each do |step|
+                run_step(filename, step)
+              end
+            end
+          end
+        EOS
+      end
+    end
 
     # For compatibility with rspec 2 and rspec 3. RSpec.current_example was added late in
     # the rspec 2 cycle.
