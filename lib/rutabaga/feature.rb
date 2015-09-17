@@ -26,13 +26,11 @@ module Rutabaga
 
     private
 
-    # Code copied and modified from jnicklas/turnip v1.3.0
+    # Adapted from jnicklas/turnip v1.3.1
     def run(feature_file, example_group_class)
       Turnip::Builder.build(feature_file).features.each do |feature|
-        instance_eval <<-EOS, feature_file, feature.line
-          describe = example_group_class.describe feature.name, feature.metadata_hash
-          run_feature(describe, feature, feature_file, example_group_class)
-        EOS
+        describe = example_group_class.describe feature.name, feature.metadata_hash
+        run_feature(describe, feature, feature_file, example_group_class)
       end
     end
 
@@ -44,15 +42,13 @@ module Rutabaga
       end
 
       feature.scenarios.each do |scenario|
-        instance_eval <<-EOS, filename, scenario.line
-          example_group_class.describe scenario.name, scenario.metadata_hash do 
-            it(scenario.steps.map(&:to_s).join(' -> ')) do
-              scenario.steps.each do |step|
-                run_step(filename, step)
-              end
+        describe.describe scenario.name, scenario.metadata_hash do 
+          it(scenario.steps.map(&:to_s).join(' -> ')) do
+            scenario.steps.each do |step|
+              run_step(filename, step)
             end
           end
-        EOS
+        end
       end
     end
 
