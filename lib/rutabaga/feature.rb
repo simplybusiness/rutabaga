@@ -36,6 +36,9 @@ module Rutabaga
 
     def run_feature(describe, feature, filename, example_group_class)
       example_group_class.before do
+        # This is kind of a hack, but it will make RSpec throw way nicer exceptions
+        get_example.metadata[:file_path] = filename
+
         feature.backgrounds.map(&:steps).flatten.each do |step|
           run_step(filename, step)
         end
