@@ -1,37 +1,17 @@
 require 'turnip/rspec'
+require 'rspec'
 
 module Rutabaga
   module Feature
     def feature(feature_file = find_feature)
 
-      rspec_class = self.class
+      example_group_class = self.class
 
       # Hack turnip into the rspec only when needed
-      rspec_class.send(:include, Turnip::RSpec::Execute)
-      rspec_class.send(:include, Turnip::Steps)
+      example_group_class.send(:include, Turnip::RSpec::Execute)
+      example_group_class.send(:include, Turnip::Steps)
 
-      builder = Turnip::Builder.build(feature_file)
-      builder.features.each do |feature|
-        rspec_class.describe(feature.name, feature.metadata_hash) do
-          rspec_class.before do
-            # This is kind of a hack, but it will make RSpec throw way nicer exceptions
-            get_example.metadata[:file_path] = feature_file
-
-            feature.backgrounds.map(&:steps).flatten.each do |step|
-              run_step(feature_file, step)
-            end
-          end
-          feature.scenarios.each do |scenario|
-            rspec_class.describe(scenario.name, scenario.metadata_hash) do
-              it scenario.steps.map(&:description).join(' -> ') do
-                scenario.steps.each do |step|
-                  run_step(feature_file, step)
-                end
-              end
-            end
-          end
-        end
-      end
+      run(feature_file, example_group_class)
     end
 
     def find_feature
@@ -46,6 +26,35 @@ module Rutabaga
     end
 
     private
+
+    # Adapted from jnicklas/turnip v1.3.1
+    def run(feature_file, example_group_class)
+      Turnip::Builder.build(feature_file).features.each do |feature|
+        describe = example_group_class.describe feature.name, feature.metadata_hash
+        run_feature(describe, feature, feature_file, example_group_class)
+      end
+    end
+
+    def run_feature(describe, feature, filename, example_group_class)
+      example_group_class.before do
+        # This is kind of a hack, but it will make RSpec throw way nicer exceptions
+        get_example.metadata[:file_path] = filename
+
+        feature.backgrounds.map(&:steps).flatten.each do |step|
+          run_step(filename, step)
+        end
+      end
+
+      feature.scenarios.each do |scenario|
+        example_group_class.describe scenario.name, scenario.metadata_hash do
+          it(scenario.steps.map(&:to_s).join(' -> ')) do
+            scenario.steps.each do |step|
+              run_step(filename, step)
+            end
+          end
+        end
+      end
+    end
 
     # For compatibility with rspec 2 and rspec 3. RSpec.current_example was added late in
     # the rspec 2 cycle.

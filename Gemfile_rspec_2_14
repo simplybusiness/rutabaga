@@ -1,4 +1,5 @@
 # Use global Gemfile and customize
 eval(IO.read('Gemfile'), binding)
 
-gem 'turnip', '1.1.0'
+# Test lowest supported version of rspec
+gem 'rspec', '~>2.14'

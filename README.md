@@ -145,6 +145,10 @@ My goal is to test just the business rule, in Turnip, and not the login, the htm
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
+## For maintainers
+
+Use `gem-release` to maintain versions https://github.com/svenfuchs/gem-release.
+
 ## Copyright
 
 Copyright © 2012 Simply Business. See LICENSE for details.

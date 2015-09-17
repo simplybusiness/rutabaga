@@ -1,36 +1,29 @@
 language: ruby
 rvm:
-  - 1.9.3
   - 2.0.0
-  - 2.1.0
+  - 2.1.7
+  - 2.2.3
   - jruby-19mode
 
 gemfile:
   - Gemfile
-  - Gemfile_turnip_1_1_0_rspec_2
-  - Gemfile_turnip_1_1_0
-  - Gemfile_rspec_2_7
+  - Gemfile_turnip_1_2_4
+  - Gemfile_rspec_2_14
 
 # Run the full suite against ruby 2.0.0 only
 matrix:
   exclude:
-    - rvm: 1.9.3
-      gemfile: Gemfile_turnip_1_1_0_rspec_2
-    - rvm: 2.1.0
-      gemfile: Gemfile_turnip_1_1_0_rspec_2
+    - rvm: 2.0.0
+      gemfile: Gemfile_turnip_1_2_4
+    - rvm: 2.1.7
+      gemfile: Gemfile_turnip_1_2_4
     - rvm: jruby-19mode
-      gemfile: Gemfile_turnip_1_1_0_rspec_2
-    - rvm: 1.9.3
-      gemfile: Gemfile_turnip_1_1_0
-    - rvm: 2.1.0
-      gemfile: Gemfile_turnip_1_1_0
+      gemfile: Gemfile_turnip_1_2_4
+    - rvm: 2.0.0
+      gemfile: Gemfile_rspec_2_14
+    - rvm: 2.1.7
+      gemfile: Gemfile_rspec_2_14
     - rvm: jruby-19mode
-      gemfile: Gemfile_turnip_1_1_0
-    - rvm: 1.9.3
-      gemfile: Gemfile_rspec_2_7
-    - rvm: 2.1.0
-      gemfile: Gemfile_rspec_2_7
-    - rvm: jruby-19mode
-      gemfile: Gemfile_rspec_2_7
+      gemfile: Gemfile_rspec_2_14
 
 script: bundle exec rspec spec
