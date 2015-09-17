@@ -45,7 +45,7 @@ module Rutabaga
       end
 
       feature.scenarios.each do |scenario|
-        describe.describe scenario.name, scenario.metadata_hash do 
+        example_group_class.describe scenario.name, scenario.metadata_hash do
           it(scenario.steps.map(&:to_s).join(' -> ')) do
             scenario.steps.each do |step|
               run_step(filename, step)
