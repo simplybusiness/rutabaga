@@ -1,4 +1,5 @@
 require 'turnip/rspec'
+require 'rspec'
 
 module Rutabaga
   module Feature
