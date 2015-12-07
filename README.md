@@ -149,6 +149,17 @@ My goal is to test just the business rule, in Turnip, and not the login, the htm
 
 Use `gem-release` to maintain versions https://github.com/svenfuchs/gem-release.
 
+## Testing alternate versions
+
+Put the following (example in a `Gemfile_for_xxx`) to test other versions of gems.
+
+```
+# Use global Gemfile and customize
+eval(IO.read('Gemfile'), binding)
+
+gem 'turnip', '1.2.4'
+```
+
 ## Copyright
 
-Copyright © 2012 Simply Business. See LICENSE for details.
+Copyright © 2012-2015 Simply Business. See LICENSE for details.
