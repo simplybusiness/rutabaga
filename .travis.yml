@@ -8,20 +8,4 @@ rvm:
 gemfile:
   - Gemfile
 
-# Run the full suite against ruby 2.0.0 only
-# matrix:
-#   exclude:
-#     - rvm: 2.0.0
-#       gemfile: Gemfile_turnip_1_2_4
-#     - rvm: 2.1.7
-#       gemfile: Gemfile_turnip_1_2_4
-#     - rvm: jruby-19mode
-#       gemfile: Gemfile_turnip_1_2_4
-#     - rvm: 2.0.0
-#       gemfile: Gemfile_rspec_2_14
-#     - rvm: 2.1.7
-#       gemfile: Gemfile_rspec_2_14
-#     - rvm: jruby-19mode
-#       gemfile: Gemfile_rspec_2_14
-
 script: bundle exec rspec spec
