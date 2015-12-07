@@ -56,14 +56,8 @@ module Rutabaga
       end
     end
 
-    # For compatibility with rspec 2 and rspec 3. RSpec.current_example was added late in
-    # the rspec 2 cycle.
     def get_example
-      begin
-        @example ||= RSpec.current_example
-      rescue NameError => e
-        @example ||= example
-      end
+      @example ||= RSpec.current_example
     end
   end
 end
