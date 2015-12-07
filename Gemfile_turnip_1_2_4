@@ -1,4 +1,0 @@
-# Use global Gemfile and customize
-eval(IO.read('Gemfile'), binding)
-
-gem 'turnip', '1.2.4'
