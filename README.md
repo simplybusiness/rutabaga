@@ -7,6 +7,7 @@ Rutabaga allows you to invert the control of feature files, so that features are
 This means that it is simple to create tests that are described by a class (such as controller tests in rspec-rails).
 
 [![Build Status](https://travis-ci.org/simplybusiness/rutabaga.svg?branch=master)](https://travis-ci.org/simplybusiness/rutabaga)
+[![Gem Version](https://badge.fury.io/rb/rutabaga.svg)](https://badge.fury.io/rb/rutabaga)
 
 ## Installation
 
