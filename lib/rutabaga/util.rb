@@ -18,10 +18,14 @@ module Rutabaga
       def find_feature(description)
         return description if File.exists?(description)
 
-        feature_file = caller(0).find do |call|
-          call =~ /_spec.rb:/
-        end.gsub(/_spec.rb:.*\Z/, '.feature')
-        return feature_file if File.exists?(feature_file)
+        unless description.nil?
+          candidate = File.join(extract_directory, description)
+          return candidate if File.exists?(candidate)
+        end
+
+        unless description =~ /.*\.feature\Z/
+          return feature_file if File.exists?(extract_feature)
+        end
 
         raise "Feature file not found. Tried: #{description} and #{feature_file}"
       end
@@ -31,6 +35,20 @@ module Rutabaga
       rescue LoadError => e
         # Don't hide LoadErrors raised in the spec helper.
         raise unless e.message.include?(filename)
+      end
+
+      private
+
+      def extract_directory
+        caller(0).find do |call|
+          call =~ /_spec.rb:/
+        end.gsub(/\/[^\/]+_spec.rb:.*\Z/, '')
+      end
+
+      def extract_feature
+        caller(0).find do |call|
+          call =~ /_spec.rb:/
+        end.gsub(/_spec.rb:.*\Z/, '.feature')
       end
     end
   end
