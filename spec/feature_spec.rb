@@ -17,7 +17,7 @@ describe 'integration', :type => :integration do
   end
 
   it "prints out failures and successes" do
-    expect(@result).to include('10 examples, 1 failure')
+    expect(@result).to include('22 examples, 4 failures')
   end
 
   it "should find features relative to the root" do
@@ -33,4 +33,7 @@ describe 'integration', :type => :integration do
     expect(@result).not_to include('Turnip::Ambiguous')
   end
 
+  it "should provide failure messages that allow a specific scenario to be run" do
+    expect(@result).to include("rspec ./examples/test_feature_example_group_spec.rb[1:1:4:1]")
+  end
 end
