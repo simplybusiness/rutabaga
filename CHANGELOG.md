@@ -29,6 +29,8 @@ describe "the feature" do
   end
 end
 ```
+
+The old way is deprecated.
 - Refactor of Turnip and RSpec integration to simplify
 - Improved feature finding, allowing features in the current directory to be found without specifying full path
 

@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe 'integration', :type => :integration do
-  before do
-    @result = %x(rspec -r rutabaga -fd examples/*_spec.rb)
+  before(:all) do
+    @result = %x(rspec -r rutabaga -fd examples/*_spec.rb 2>&1)
   end
 
   it "shows the correct description" do
@@ -17,7 +17,7 @@ describe 'integration', :type => :integration do
   end
 
   it "prints out failures and successes" do
-    expect(@result).to include('22 examples, 4 failures')
+    expect(@result).to include('11 examples, 2 failures')
   end
 
   it "should find features relative to the root" do
@@ -35,5 +35,9 @@ describe 'integration', :type => :integration do
 
   it "should provide failure messages that allow a specific scenario to be run" do
     expect(@result).to include("rspec ./examples/test_feature_example_group_spec.rb[1:1:4:1]")
+  end
+
+  it "should have a feature deprecation warning" do
+    expect(@result).to include("Calling `feature` from an `it` block is deprecated.")
   end
 end
