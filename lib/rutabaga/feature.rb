@@ -14,6 +14,8 @@ module Rutabaga
       Turnip::RSpec.rutabaga_run(feature_file, example_group_class)
     end
 
+    private
+
     def find_feature
       description = RSpec.current_example.description
       Util.find_feature(description)
