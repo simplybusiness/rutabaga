@@ -24,7 +24,6 @@ describe "should find the feature file using the root (and monkey patching the r
   step "my result is :result" do |result|
     expect(@first.to_i + @second.to_i - 1).to eq(result.to_i)
   end
-
 end
 
 describe "causes a failing test" do
@@ -38,7 +37,6 @@ describe "causes a failing test" do
   step "my result is :result" do |result|
     expect(@first.to_i + @second.to_i).to eq(result.to_i)
   end
-
 end
 
 describe "finds a feature file given as parameter to the 'feature' method" do
@@ -52,7 +50,23 @@ describe "finds a feature file given as parameter to the 'feature' method" do
   step "my result is :result" do |result|
     expect(@first.to_i * @second.to_i).to eq(result.to_i)
   end
+end
 
+describe "causes an error whent the feature file is not found" do
+  feature "foo.feature"
+end
+
+describe "finds a feature file with a different name in the same directory" do
+  feature "test3.feature"
+
+  step "that :first * :second is calculated" do |first, second|
+    @first = first
+    @second = second
+  end
+
+  step "my result is :result" do |result|
+    expect(@first.to_i * @second.to_i).to eq(result.to_i)
+  end
 end
 
 describe "backgrounds are properly called" do

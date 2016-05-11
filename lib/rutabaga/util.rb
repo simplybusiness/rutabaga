@@ -16,18 +16,24 @@ module Rutabaga
   class Util
     class << self
       def find_feature(description)
-        return description if File.exists?(description)
+        tried = []
 
-        unless description.nil?
+        unless description.nil? || description =~ /\s/
+          return description if File.exists?(description)
+          tried << description
+
           candidate = File.join(extract_directory, description)
           return candidate if File.exists?(candidate)
+          tried << candidate
         end
 
         unless description =~ /.*\.feature\Z/
-          return feature_file if File.exists?(extract_feature)
+          feature_file = extract_feature
+          return feature_file if File.exists?(feature_file)
+          tried << feature_file
         end
 
-        raise "Feature file not found. Tried: #{description} and #{feature_file}"
+        raise "Feature file not found. Tried: #{tried.join(', ')}"
       end
 
       def require_if_exists(filename)
