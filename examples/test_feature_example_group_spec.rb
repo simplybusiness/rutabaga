@@ -52,10 +52,6 @@ describe "finds a feature file given as parameter to the 'feature' method" do
   end
 end
 
-describe "causes an error whent the feature file is not found" do
-  feature "foo.feature"
-end
-
 describe "finds a feature file with a different name in the same directory" do
   feature "test3.feature"
 
