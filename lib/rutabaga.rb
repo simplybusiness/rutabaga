@@ -1,5 +1,5 @@
 require 'rutabaga/version'
 require 'turnip'
 require 'rutabaga/feature'
-require 'rutabaga/feature2'
+require 'rutabaga/example_group/feature'
 require 'rutabaga/util'

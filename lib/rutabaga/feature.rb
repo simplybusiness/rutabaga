@@ -22,9 +22,3 @@ module Rutabaga
     end
   end
 end
-
-::RSpec.configure do |c|
-  c.include Rutabaga::Feature
-  # Blow away turnip's pattern, and focus just on features directory
-  c.pattern.gsub!(",**/*.feature", ",features/**/*.feature")
-end
