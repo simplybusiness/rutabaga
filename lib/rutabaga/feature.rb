@@ -11,53 +11,12 @@ module Rutabaga
       example_group_class.send(:include, Turnip::RSpec::Execute)
       example_group_class.send(:include, Turnip::Steps)
 
-      run(feature_file, example_group_class)
+      Turnip::RSpec.rutabaga_run(feature_file, example_group_class)
     end
 
     def find_feature
-      return get_example.description if File.exists?(get_example.description)
-
-      feature_file = caller(0).find do |call|
-        call =~ /_spec.rb:/
-      end.gsub(/_spec.rb:.*\Z/, '.feature')
-      return feature_file if File.exists?(feature_file)
-
-      raise "Feature file not found. Tried: #{get_example.description} and #{feature_file}"
-    end
-
-    private
-
-    # Adapted from jnicklas/turnip v1.3.1
-    def run(feature_file, example_group_class)
-      Turnip::Builder.build(feature_file).features.each do |feature|
-        describe = example_group_class.describe feature.name, feature.metadata_hash
-        run_feature(describe, feature, feature_file, example_group_class)
-      end
-    end
-
-    def run_feature(describe, feature, filename, example_group_class)
-      example_group_class.before do
-        # This is kind of a hack, but it will make RSpec throw way nicer exceptions
-        get_example.metadata[:file_path] = filename
-
-        feature.backgrounds.map(&:steps).flatten.each do |step|
-          run_step(filename, step)
-        end
-      end
-
-      feature.scenarios.each do |scenario|
-        example_group_class.describe scenario.name, scenario.metadata_hash do
-          it(scenario.steps.map(&:to_s).join(' -> ')) do
-            scenario.steps.each do |step|
-              run_step(filename, step)
-            end
-          end
-        end
-      end
-    end
-
-    def get_example
-      @example ||= RSpec.current_example
+      description = RSpec.current_example.description
+      Util.find_feature(description)
     end
   end
 end
