@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "test feature example group" do
-  feature "test.feature"
+  feature
 
   step "that :first + :second is calculated" do |first, second|
     @first = first
