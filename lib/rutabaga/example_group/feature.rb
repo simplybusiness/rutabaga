@@ -3,9 +3,12 @@ require 'rspec'
 
 # Monkey patch RSpec to add the feature method in example groups
 class RSpec::Core::ExampleGroup
-  idempotently_define_singleton_method(:feature) do |*args|
-    description = args.shift
-    Rutabaga::ExampleGroup::Feature.feature(self, description, args)
+  idempotently_define_singleton_method(:feature) do |*all_args|
+    desc, *args = *all_args
+
+    options = RSpec::Core::Metadata.build_hash_from(args)
+
+    Rutabaga::ExampleGroup::Feature.feature(self, desc, options)
   end
 end
 
