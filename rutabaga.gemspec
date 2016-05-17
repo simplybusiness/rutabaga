@@ -16,6 +16,9 @@ Gem::Specification.new do |gem|
   gem.version       = Rutabaga::VERSION
   gem.license       = 'MIT'
 
-  gem.add_runtime_dependency 'turnip', ['>= 2.0']
+  gem.add_runtime_dependency 'turnip', ['~> 2.0.0']
+  gem.add_runtime_dependency 'gherkin', ['~> 2.0']
+  # There is a bug in 3.4.1 with turnip 2.0.x
+  gem.add_runtime_dependency 'rspec-mocks', ['<= 3.4.0']
   gem.add_development_dependency "pry", '~> 0'
 end
