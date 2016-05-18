@@ -8,7 +8,9 @@ describe Rutabaga::Util do
     end
 
     it "finds the feature" do
-      expect(subject.class.send(:extract_feature)).to match(/\/rutabaga\/spec\/rutabaga\/util\.feature\Z/)
+      features = subject.class.send(:extract_features)
+      expect(features[0]).to match(/\/rutabaga\/spec\/rutabaga\/util\.feature\Z/)
+      expect(features[1]).to match(/\/rutabaga\/spec\/rutabaga\/util\.rutabaga\Z/)
     end
   end
 
@@ -62,12 +64,36 @@ describe Rutabaga::Util do
         expect(subject).to match(/spec\/rutabaga\/util\.feature\Z/)
       end
 
+      it "description does not match a feature file" do
+        @description = 'this is not a feature file'
+        allow(File).to receive(:exists?).with(/this is not a feature file/).and_return(false)
+
+        allow(File).to receive(:exists?).with(/spec\/rutabaga\/util\.feature\Z/).and_return(false)
+        allow(File).to receive(:exists?).with(/spec\/rutabaga\/util\.rutabaga\Z/).and_return(true)
+        expect(subject).to match(/spec\/rutabaga\/util\.rutabaga\Z/)
+      end
+
       it "handles paths with spaces" do
         @description = '/User/person/Internet plugins/feature.feature'
         allow(File).to receive(:exists?).with(@description).and_return(true)
 
         expect(subject).to eq(@description)
       end
+
+      it "allows the .feature extension" do
+        @description = "example.feature"
+        allow(File).to receive(:exists?).with(@description).and_return(true)
+
+        expect(subject).to include(@description)
+      end
+
+      it "allows the .rutabaga extension" do
+        @description = "example.rutabaga"
+        allow(File).to receive(:exists?).with(@description).and_return(true)
+
+        expect(subject).to include(@description)
+      end
+
     end
 
     describe "raises an error if the feature cannot be found" do
@@ -91,6 +117,13 @@ describe Rutabaga::Util do
         @description = "example.feature"
 
         expect{subject}.to raise_error(/Feature file not found\. Tried: example\.feature, [\\\/\w]*example\.feature/)
+      end
+
+      it "raises an error if the filename does not end in feature" do
+        @description = "example.other"
+        allow(File).to receive(:exists?).with(@description).and_return(true)
+
+        expect{subject}.to raise_error(/Feature file not found\. Tried: [\\\/\w]*\/spec\/rutabaga\/util\.feature/)
       end
     end
   end

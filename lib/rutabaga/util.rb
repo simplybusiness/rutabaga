@@ -18,7 +18,7 @@ module Rutabaga
       def find_feature(description)
         tried = []
 
-        if description =~ /.*\.feature\Z/
+        if description =~ /.*\.(feature|rutabaga)\Z/
           return description if File.exists?(description)
           tried << description
 
@@ -26,9 +26,11 @@ module Rutabaga
           return candidate if File.exists?(candidate)
           tried << candidate
         else
-          feature_file = extract_feature
-          return feature_file if File.exists?(feature_file)
-          tried << feature_file
+          feature_files = extract_features
+          feature_files.each do |feature_file|
+            return feature_file if File.exists?(feature_file)
+          end
+          tried += feature_files
         end
 
         raise "Feature file not found. Tried: #{tried.join(', ')}"
@@ -49,10 +51,11 @@ module Rutabaga
         end.gsub(/\/[^\/]+_spec.rb:.*\Z/, '')
       end
 
-      def extract_feature
-        caller(0).find do |call|
+      def extract_features
+        base = caller(0).find do |call|
           call =~ /_spec.rb:/
-        end.gsub(/_spec.rb:.*\Z/, '.feature')
+        end.gsub(/_spec.rb:.*\Z/, '')
+        [base+'.feature', base+'.rutabaga']
       end
     end
   end

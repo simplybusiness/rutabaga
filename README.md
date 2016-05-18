@@ -90,6 +90,8 @@ end
 
 Will run `spec/controllers/test.feature`.
 
+**Note** Anywhere that a `.feature` extension can be used, a `.rutabaga` extension is also valid.
+
 ### Definining steps
 
 Steps are defined in the same way as in Turnip, however, steps can be defined within the rspec context and are scoped to only be available there.
