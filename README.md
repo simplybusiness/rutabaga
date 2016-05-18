@@ -128,6 +128,11 @@ In any case, business rules are usually implemented somewhere inside a class tes
 
 The goal is to test just the business rule, in Rutabaga, and not the login, the html, the steps to get there, etc. That way, when the rule changes, only the feature, the test code and the class in question need to change. The test is not affected by wider ranging changes, and is therefore less brittle. The features run at the unit code level, but are acceptance tests.
 
+## Notes/Issues
+
+1. Capybara's rspec extension also redefines feature, so rutabaga will block capaybara's feature example groups
+   from working.
+
 ## Contributing
 
 1. Fork it

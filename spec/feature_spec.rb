@@ -29,7 +29,7 @@ describe 'integration', :type => :integration do
   end
 
   it "prints out failures and successes" do
-    expect(@result).to include('19 examples, 4 failures')
+    expect(@result).to include('20 examples, 4 failures')
   end
 
   it "should find features relative to the root" do
@@ -51,5 +51,9 @@ describe 'integration', :type => :integration do
 
   it "should have a feature deprecation warning" do
     expect(@result).to include("Calling `feature` from an `it` block is deprecated.")
+  end
+
+  it "runs feature blocks even if capybara/rspec is installed" do
+    expect(@result).to include("capaybara rails does not overwrite the feature command")
   end
 end
