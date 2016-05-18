@@ -1,5 +1,7 @@
 # Rutabaga
 
+![image](rutabaga-vs-turnip.jpg)
+
 [Turnip](https://github.com/jnicklas/turnip) hacks to enable running turnips from inside spec files, rather than outside.
 
 Rutabaga allows you to invert the control of feature files, so that features are called from your `_spec.rb` files rather than the other way around. Step definitions are then put into the `_spec.rb` files as well. The steps are then scoped to that particular test.
