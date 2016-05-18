@@ -21,9 +21,7 @@ end
 New:
 
 ```ruby
-describe "the feature" do
-  feature
-
+feature "the feature" do
   step "first step" do
     ...
   end
