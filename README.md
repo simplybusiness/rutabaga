@@ -57,8 +57,8 @@ end
 If you create a file `spec/controllers/test_feature_spec.rb` and add:
 
 ```ruby
-describe "should run feature" do
-  feature
+feature "should run feature" do
+
 end
 ```
 
@@ -75,13 +75,17 @@ Then the feature will be:
 Alternatively, if the feature is specified in the `feature`, that takes precedence:
 
 ```ruby
-feature "spec/features/test.feature"
+feature "spec/features/test.feature" do
+
+end
 ```
 
 Path can also be relative to the spec location so:
 
 ```ruby
-feature "test.feature"
+feature "test.feature" do
+
+end
 ```
 
 Will run `spec/controllers/test.feature`.
@@ -91,16 +95,14 @@ Will run `spec/controllers/test.feature`.
 Steps are defined in the same way as in Turnip, however, steps can be defined within the rspec context and are scoped to only be available there.
 
 ```ruby
-describe "step will only be in this context" do
-  feature
+feature "step will only be in this context" do
 
   step "action :named" do |named| do
     expect(named).to eq("a name")
   end
 end
 
-describe "step 'action :named' is not available here" do
-  feature
+feature "step 'action :named' is not available here" do
 
   # missing step will cause tests to be marked as pending"
 end

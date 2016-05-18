@@ -1,8 +1,19 @@
 require 'spec_helper'
 
-describe "test feature example group" do
+describe "test feature argument" do
   feature
 
+  step "that :first + :second is calculated" do |first, second|
+    @first = first
+    @second = second
+  end
+
+  step "my result is :result" do |result|
+    expect(@first.to_i + @second.to_i).to eq(result.to_i)
+  end
+end
+
+feature "feature block" do
   step "that :first + :second is calculated" do |first, second|
     @first = first
     @second = second

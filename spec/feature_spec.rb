@@ -11,13 +11,21 @@ describe 'integration', :type => :integration do
     expect(@result).to include('my result is 4')
   end
 
+  it "executes features as an argument" do
+    expect(@result).to include('test feature argument')
+  end
+
+  it "executes features as blocks/example groups" do
+    expect(@result).to include('feature block')
+  end
+
   it "should not show any pending steps" do
     expect(@result).not_to include('PENDING')
     expect(@result).not_to include('No such step')
   end
 
   it "prints out failures and successes" do
-    expect(@result).to include('11 examples, 2 failures')
+    expect(@result).to include('15 examples, 3 failures')
   end
 
   it "should find features relative to the root" do
@@ -34,7 +42,7 @@ describe 'integration', :type => :integration do
   end
 
   it "should provide failure messages that allow a specific scenario to be run" do
-    expect(@result).to include("rspec ./examples/test_feature_example_group_spec.rb[1:1:4:1]")
+    expect(@result).to include("rspec ./examples/test_feature_example_group_spec.rb[1:1:1:4:1]")
   end
 
   it "should have a feature deprecation warning" do
