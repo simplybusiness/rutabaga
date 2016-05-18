@@ -70,7 +70,7 @@ describe Rutabaga::Util do
       end
     end
 
-    describe "raises and error if the feature cannot be found" do
+    describe "raises an error if the feature cannot be found" do
       before do
         allow(File).to receive(:exists?).and_return(false)
       end
