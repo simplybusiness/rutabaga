@@ -19,13 +19,17 @@ describe 'integration', :type => :integration do
     expect(@result).to include('feature block')
   end
 
+  it "executes features as blocks inside example groups" do
+    expect(@result).to include('feature block inside a describe block')
+  end
+
   it "should not show any pending steps" do
     expect(@result).not_to include('PENDING')
     expect(@result).not_to include('No such step')
   end
 
   it "prints out failures and successes" do
-    expect(@result).to include('15 examples, 3 failures')
+    expect(@result).to include('19 examples, 4 failures')
   end
 
   it "should find features relative to the root" do
