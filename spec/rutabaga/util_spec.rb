@@ -61,6 +61,13 @@ describe Rutabaga::Util do
         allow(File).to receive(:exists?).with(/spec\/rutabaga\/util\.feature\Z/).and_return(true)
         expect(subject).to match(/spec\/rutabaga\/util\.feature\Z/)
       end
+
+      it "handles paths with spaces" do
+        @description = '/User/person/Internet plugins/feature.feature'
+        allow(File).to receive(:exists?).with(@description).and_return(true)
+
+        expect(subject).to eq(@description)
+      end
     end
 
     describe "raises and error if the feature cannot be found" do
@@ -83,7 +90,7 @@ describe Rutabaga::Util do
       it "has a filename description but the file doesn't exist" do
         @description = "example.feature"
 
-        expect{subject}.to raise_error(/Feature file not found\. Tried: example\.feature, [\\\/\w]*example\.feature/)        
+        expect{subject}.to raise_error(/Feature file not found\. Tried: example\.feature, [\\\/\w]*example\.feature/)
       end
     end
   end

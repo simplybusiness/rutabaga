@@ -18,16 +18,14 @@ module Rutabaga
       def find_feature(description)
         tried = []
 
-        unless description.nil? || description =~ /\s/
+        if description =~ /.*\.feature\Z/
           return description if File.exists?(description)
           tried << description
 
           candidate = File.join(extract_directory, description)
           return candidate if File.exists?(candidate)
           tried << candidate
-        end
-
-        unless description =~ /.*\.feature\Z/
+        else
           feature_file = extract_feature
           return feature_file if File.exists?(feature_file)
           tried << feature_file
