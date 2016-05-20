@@ -23,8 +23,4 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'rspec-mocks', ['<= 3.4.0']
   gem.add_development_dependency 'capybara'
   gem.add_development_dependency 'pry', '~> 0'
-  gem.add_development_dependency 'pry-doc'
-  gem.add_development_dependency 'pry-stack_explorer'
-  gem.add_development_dependency 'pry-rescue'
-
 end
