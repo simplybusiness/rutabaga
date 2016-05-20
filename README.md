@@ -56,19 +56,17 @@ end
 
 ### Running a feature file from a spec file
 
-Please look in `spec/controllers/feature_test_spec.rb` and `spec/controllers/feature_test.feature` for more.
-
-For file `spec/controllers/test_feature_spec.rb`
+If you create a file `spec/controllers/test_feature_spec.rb` and add:
 
 ```ruby
-it "should run feature" do
-  feature
+feature "should run feature" do
+
 end
 ```
 
-Will run `spec/controllers/test_feature.feature`.
+Rutabaga will run `spec/controllers/test_feature.feature`.
 
-Features are found either with the same name as the spec file, or as specified in the example name `it "relative_from_root/path/to/feature/file.feature"`. So, if you have:
+Features are found either with the same name as the spec file, or as specified by the feature `feature "relative_from_root/path/to/feature/file.feature"`. So, if you have:
 
 `spec/controllers/feature_test_spec.rb`
 
@@ -76,45 +74,41 @@ Then the feature will be:
 
 `spec/controllers/feature_test.feature`
 
-Alternatively, if the feature is specified in the `it`, that takes precedence:
+Alternatively, if the feature is specified in the `feature`, that takes precedence:
 
 ```ruby
-it "spec/features/test.feature" do
-    feature
+feature "spec/features/test.feature" do
+
 end
 ```
 
-Will run `spec/features/test.feature`.
-
-Second alternative, is specifying the feature file in the `feature` command:
+Path can also be relative to the spec location so:
 
 ```ruby
-it "should run the feature" do
-    feature "spec/features/test.feature"
+feature "test.feature" do
+
 end
 ```
 
-Will run `spec/features/test.feature`.
+Will run `spec/controllers/test.feature`.
+
+**Note** Anywhere that a `.feature` extension can be used, a `.rutabaga` extension is also valid.
 
 ### Definining steps
 
 Steps are defined in the same way as in Turnip, however, steps can be defined within the rspec context and are scoped to only be available there.
 
 ```ruby
-describe "step will only be in this context" do
-  it "should run feature" do
-    feature
-  end
+feature "step will only be in this context" do
 
   step "action :named" do |named| do
     expect(named).to eq("a name")
   end
 end
 
-describe "step 'action :named' is not available here" do
-  it "cannot run feature due to missing step" do
-    expect(feature).to raise_error
-  end
+feature "step 'action :named' is not available here" do
+
+  # missing step will cause tests to be marked as pending"
 end
 ```
 
@@ -130,15 +124,18 @@ Other than these differences, Rutabaga is a tiny shim over Turnip and all featur
 * Test those rules whereever/however appropriate (not just through Capybara/black box)
 * Use the full power of RSpec (so being able to describe a class and then test it)
 
-From my point of view, the fundamental purpose of Turnip/Cucumber is to document the system in end-user readable form. It is not just to do integration tests.
-
 The most important functionality in a system is the business rules. These range from what appears on a page, to complex rules around when emails should be sent to who. For example, we've written Gherkin tests to test premium changes when a customer changes their insurance coverage.
 
 These rules are often implemented in a Model, a lib class, or some other specific class in the system, especially if the application is well modularized.
 
-In any case, business rules are usually implemented somewhere inside a class tested by a unit test. I want to get those business rules tested in Cucumber/Turnip without having to go through the whole system, and without having to have duplicate tests, one inside my rspec and another inside my features.
+In any case, business rules are usually implemented somewhere inside a class tested by a unit test. Those business rules should be tested in Cucumber/Turnip without having to go through the whole system, and without having to have duplicate tests, one inside rspec and another inside features.
 
-My goal is to test just the business rule, in Turnip, and not the login, the html, the steps to get there, etc. That way, when the rule changes, I change the Turnip, the test code and the class in question. My test is not affected by wider ranging changes, and therefore less brittle. I guess, in that sense, the code runs at the unit code level, but is an acceptance test.
+The goal is to test just the business rule, in Rutabaga, and not the login, the html, the steps to get there, etc. That way, when the rule changes, only the feature, the test code and the class in question need to change. The test is not affected by wider ranging changes, and is therefore less brittle. The features run at the unit code level, but are acceptance tests.
+
+## Notes/Issues
+
+1. Capybara's rspec extension also redefines feature, so rutabaga will block capaybara's feature example groups
+   from working.
 
 ## Contributing
 
@@ -160,9 +157,9 @@ Put the following (example in a `Gemfile_for_xxx`) to test other versions of gem
 # Use global Gemfile and customize
 eval(IO.read('Gemfile'), binding)
 
-gem 'turnip', '1.2.4'
+gem 'turnip', '1.3.1'
 ```
 
 ## Copyright
 
-Copyright © 2012-2015 Simply Business. See LICENSE for details.
+Copyright © 2012-2016 Simply Business. See LICENSE for details.

@@ -4,7 +4,7 @@ Scenario: ensures the feature is called
 Given that 2 + 2 is calculated
 Then my result is 4
 
-Scenario Outline: ensures the outline feature is called
+Scenario Outline: ensures the outline feature is called with one failing example which can be called individually
 Given that <a> + <b> is calculated
 Then my result is <c>
 
