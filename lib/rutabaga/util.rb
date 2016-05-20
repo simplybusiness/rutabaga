@@ -5,7 +5,7 @@ module Turnip::RSpec
   def self.rutabaga_run(feature_file, example_group_class)
     Turnip::Builder.build(feature_file).features.each do |feature|
       instance_eval <<-EOS, feature_file, feature.line
-        describe = example_group_class.describe feature.name, feature.metadata_hash
+        describe = example_group_class.describe feature.name, feature.metadata_hash.reject { |key, _| key == :type }
         run_feature(describe, feature, feature_file)
       EOS
     end

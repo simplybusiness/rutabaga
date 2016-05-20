@@ -1,4 +1,5 @@
 require 'rutabaga/version'
+require 'active_support/concern'
 require 'turnip'
 require 'rutabaga/feature'
 require 'rutabaga/example_group/feature'
