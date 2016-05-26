@@ -7,8 +7,15 @@ module Rutabaga
       RSpec.deprecate(
         "Calling `feature` from an `it` block",
         :message => "Calling `feature` from an `it` block " \
-                    "is deprecated.\nIt should now be called directly in the " \
-                    "`describe` block."
+                    "is deprecated.\nYou should now put your steps inside " \
+                    "a `feature` block.\n\n" \
+                    "```\n" \
+                    "feature \"optional feature file location\" do\n" \
+                    "  step \"a step\" do\n" \
+                    "    ...\n" \
+                    "  end\n" \
+                    "end\n" \
+                    "```"
       )
 
       feature_file = Util.find_feature(feature_file || RSpec.current_example.description)
