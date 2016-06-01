@@ -136,6 +136,9 @@ The goal is to test just the business rule, in Rutabaga, and not the login, the 
 
 1. Capybara's rspec extension also redefines feature, so rutabaga will block capaybara's feature example groups
    from working.
+1. In order to call a specific scenario, you can use `rspec`'s filtering. Here is an example:
+    `$ rspec spec/test_file_spec.rb -e "Title of my scenario"`. 
+   This will only call the Scenario titled `Title of my scenario` in file `spec/test_file_spec.rb`
 
 ## Contributing
 
