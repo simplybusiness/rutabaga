@@ -22,6 +22,6 @@ module Turnip
 end
 
 ::RSpec.configure do |c|
-  # Blow away rutabaga's pattern if still there, and focus just on features directory
+  # Blow away rutabaga's pattern if still there
   c.pattern.gsub!(",features/**/*.feature", "")
 end
