@@ -2,7 +2,7 @@
 
 ![image](rutabaga-vs-turnip.jpg)
 
-[Turnip](https://github.com/jnicklas/turnip) hacks to enable running turnips from inside spec files, rather than outside.
+[Turnip](https://github.com/jnicklas/turnip) extension to enable running turnip features from inside spec files, rather than outside.
 
 Rutabaga allows you to invert the control of feature files, so that features are called from your `_spec.rb` files rather than the other way around. Step definitions are then put into the `_spec.rb` files as well. The steps are then scoped to that particular test.
 
@@ -27,21 +27,28 @@ group :test do
 end
 ```
 
-Now edit the `.rspec` file in your project directory (create it if doesn't
+Choose which mode you want to use: __Turnip compatibility mode__ or __No Turnip mode__.
+
+### Turnip compatibility mode
+
+In this mode, you can still have and call classic Turnip features directly, as long
+as they are situated under the `spec/features` directory.
+
+Edit the `.rspec` file in your project directory (create it if doesn't
 exist), and add the following:
 
 ```
 -r rutabaga
 ```
 
-Add the follwing lines to the bottom of your `spec_helper.rb` (assuming you want to use Capybara and the final one if you wish to have step definitions outside of your spec files:
+Add the following line to the bottom of your `spec_helper.rb` in order to use
+Turnip global step definitions:
 
 ```ruby
-require 'turnip/capybara'
 Dir.glob("spec/features/step_definitions/**/*_steps.rb") { |f| load f, true }
 ```
 
-In order to get `rake` or `bundle exec rake` to work properly, you might need to add this in the file `lib/tasks/rspec.rake` (at least for rails)
+In order to get `rake` or `bundle exec rake` to work properly you might need to add this in the file `lib/tasks/rspec.rake` (at least for rails).
 
 ```ruby
 if defined? RSpec # otherwise fails on non-live environments
@@ -50,6 +57,22 @@ if defined? RSpec # otherwise fails on non-live environments
     t.pattern = './spec/{**/*_spec.rb,features/**/*.feature}'
   end
 end
+```
+
+### No Turnip Mode
+
+If you do not want to use Turnip features then you can disable turnip by adding the following to you `.rspec` file instead of `-r rutabaga`:
+
+```ruby
+-r rutabaga/no_turnip
+```
+
+### Capybara support
+
+Add the following line to the bottom of your `spec_helper.rb` in order to use Capybara javascript driver (when features are tagged with `@javascript`):
+
+```ruby
+require 'turnip/capybara'
 ```
 
 ## Usage
@@ -100,14 +123,12 @@ Steps are defined in the same way as in Turnip, however, steps can be defined wi
 
 ```ruby
 feature "step will only be in this context" do
-
   step "action :named" do |named| do
     expect(named).to eq("a name")
   end
 end
 
 feature "step 'action :named' is not available here" do
-
   # missing step will cause tests to be marked as pending"
 end
 ```
@@ -120,9 +141,9 @@ Other than these differences, Rutabaga is a tiny shim over Turnip and all featur
 
 ## Why?
 
-* Document business rules in Gherkin/Turnip/Cucumber human readable language
-* Test those rules whereever/however appropriate (not just through Capybara/black box)
-* Use the full power of RSpec (so being able to describe a class and then test it)
+* Allows you to document business rules in Gherkin/Turnip/Cucumber human readable language
+* Test those rules wherever/however appropriate (not just through Capybara/black box)
+* Use the full power of RSpec (being able to describe a class and then test it)
 
 The most important functionality in a system is the business rules. These range from what appears on a page, to complex rules around when emails should be sent to who. For example, we've written Gherkin tests to test premium changes when a customer changes their insurance coverage.
 
@@ -130,12 +151,12 @@ These rules are often implemented in a Model, a lib class, or some other specifi
 
 In any case, business rules are usually implemented somewhere inside a class tested by a unit test. Those business rules should be tested in Cucumber/Turnip without having to go through the whole system, and without having to have duplicate tests, one inside rspec and another inside features.
 
-The goal is to test just the business rule, in Rutabaga, and not the login, the html, the steps to get there, etc. That way, when the rule changes, only the feature, the test code and the class in question need to change. The test is not affected by wider ranging changes, and is therefore less brittle. The features run at the unit code level, but are acceptance tests.
+The goal is to test just the business rule in Rutabaga, and not the login, the html, the steps to get there, etc. That way, when the rule changes, only the feature, the test code and the class in question need to change. The test is not affected by wider ranging changes, and is therefore less brittle. The features run at the unit code level, but are acceptance tests.
 
 ## Notes/Issues
 
-1. Capybara's rspec extension also redefines feature, so rutabaga will block capaybara's feature example groups
-   from working.
+1. Capybara's rspec extension also redefines feature, so rutabaga will block
+   capaybara's feature example groups from working.
 
 ## Contributing
 
@@ -157,7 +178,7 @@ Put the following (example in a `Gemfile_for_xxx`) to test other versions of gem
 # Use global Gemfile and customize
 eval(IO.read('Gemfile'), binding)
 
-gem 'turnip', '1.3.1'
+gem 'turnip', '2.0.0'
 ```
 
 ## Copyright
