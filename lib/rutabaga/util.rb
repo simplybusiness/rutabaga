@@ -65,10 +65,8 @@ end
   c.include Rutabaga::Feature
   # Blow away turnip's pattern, and focus just on features directory
   if defined?(Rutabaga::NO_TURNIP)
-    puts "no turnip"
     c.pattern.gsub!(",**/*.feature", "")
   else
-    puts "turnip"
     c.pattern.gsub!(",**/*.feature", ",features/**/*.feature")
   end
 end

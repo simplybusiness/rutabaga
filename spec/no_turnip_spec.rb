@@ -12,11 +12,11 @@ describe 'no_turnip', :type => :integration do
     end
 
     it "has the correct file pattern" do
-      result = %x(rspec -r rutabaga/no_turnip -r rutabaga examples/test_pattern_spec.rb)
+      result = %x(rspec -r rutabaga/no_turnip -r rutabaga examples/pattern/test_pattern_spec.rb)
       expect(result).to include("RSpec.configuration.pattern: **{,/*/**}/*_spec.rb\n")
-      result = %x(rspec -r rutabaga -r rutabaga/no_turnip -r rutabaga examples/test_pattern_spec.rb)
+      result = %x(rspec -r rutabaga -r rutabaga/no_turnip -r rutabaga examples/pattern/test_pattern_spec.rb)
       expect(result).to include("RSpec.configuration.pattern: **{,/*/**}/*_spec.rb\n")
-      result = %x(rspec -r rutabaga/no_turnip examples/test_pattern_spec.rb)
+      result = %x(rspec -r rutabaga/no_turnip examples/pattern/test_pattern_spec.rb)
       expect(result).to include("RSpec.configuration.pattern: **{,/*/**}/*_spec.rb\n")
     end
   end
@@ -35,8 +35,6 @@ describe 'no_turnip', :type => :integration do
     end
 
     describe "outside of the correct directory" do
-      # rspec -r rutabaga/turnip examples/test_feature_example_group.feature
-      # rspec -r rutabaga/turnip spec/features/fixture.feature
       before(:all) do
         @result = %x(rspec -r rutabaga examples/test.feature 2>&1)
       end
@@ -47,13 +45,13 @@ describe 'no_turnip', :type => :integration do
     end
 
     it "has the correct file pattern" do
-      result = %x(rspec -r rutabaga examples/test_pattern_spec.rb)
+      result = %x(rspec -r rutabaga examples/pattern/test_pattern_spec.rb)
       expect(result).to include("RSpec.configuration.pattern: **{,/*/**}/*_spec.rb,features/**/*.feature\n")
-      result = %x(rspec -r rutabaga/turnip -r rutabaga examples/test_pattern_spec.rb)
+      result = %x(rspec -r rutabaga/turnip -r rutabaga examples/pattern/test_pattern_spec.rb)
       expect(result).to include("RSpec.configuration.pattern: **{,/*/**}/*_spec.rb,features/**/*.feature\n")
-      result = %x(rspec -r rutabaga -r rutabaga/turnip -r rutabaga examples/test_pattern_spec.rb)
+      result = %x(rspec -r rutabaga -r rutabaga/turnip -r rutabaga examples/pattern/test_pattern_spec.rb)
       expect(result).to include("RSpec.configuration.pattern: **{,/*/**}/*_spec.rb,features/**/*.feature\n")
-      result = %x(rspec -r rutabaga/turnip examples/test_pattern_spec.rb)
+      result = %x(rspec -r rutabaga/turnip examples/pattern/test_pattern_spec.rb)
       expect(result).to include("RSpec.configuration.pattern: **{,/*/**}/*_spec.rb,features/**/*.feature\n")
     end
   end
