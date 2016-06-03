@@ -64,5 +64,9 @@ end
 ::RSpec.configure do |c|
   c.include Rutabaga::Feature
   # Blow away turnip's pattern, and focus just on features directory
-  c.pattern.gsub!(",**/*.feature", ",features/**/*.feature")
+  if defined?(Rutabaga::NO_TURNIP)
+    c.pattern.gsub!(",**/*.feature", "")
+  else
+    c.pattern.gsub!(",**/*.feature", ",features/**/*.feature")
+  end
 end
