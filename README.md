@@ -173,6 +173,24 @@ The goal is to test just the business rule in Rutabaga, and not the login, the h
 
 Use `gem-release` to maintain versions https://github.com/svenfuchs/gem-release.
 
+To update the minor version (e.g. 0.0.1 to 0.0.2), after merging the PR to `master` run:
+
+```
+gem bump --tag --release
+```
+
+if instead you want to bump the minor version (e.g. 0.0.1 to 0.1.0):
+
+```
+gem bump --version minor --tag --release
+```
+
+or major version (e.g. 0.0.1 to 1.0.0):
+
+```
+gem bump --version major --tag --release
+```
+
 ## Testing alternate versions
 
 Put the following (example in a `Gemfile_for_xxx`) to test other versions of gems.
