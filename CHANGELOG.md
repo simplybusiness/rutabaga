@@ -1,5 +1,15 @@
 # Changes
 
+## Version 2.1.3
+
+- Fixes ability for parallel_tests to handle turnip output, even when rutabaga is used. This has been broken since version 2.0
+
+## Version 2.1.0
+
+- **No Turnip Mode**: Turnip support can now be disabled by including `rutabaga/no_turnip` for example
+  by calling `rspec -r rutabaga/no_turnip`
+- When requesting features outside of the turnip directory `spec/features` a warning is issued
+
 ## Version 2.0.0
 
 - Features should now be called directly in the describe block rather than inside an `it` block. This allows specific scenarios to be run without having to run the entire feature.
