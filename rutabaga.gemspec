@@ -20,6 +20,5 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'rspec', '~> 3.4.0'
 
   gem.add_development_dependency 'capybara'
-  gem.add_development_dependency 'rack', '~> 1.6'
   gem.add_development_dependency 'pry', '~> 0'
 end
