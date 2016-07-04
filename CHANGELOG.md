@@ -2,7 +2,7 @@
 
 ## Version 2.1.4
 
-- Locked to Rspec versions between 3 and 3.4
+- Locked to Rspec versions between 3 and 3.4 as currently 3.5 is not supported
 - Removed activesupport dependency as no longer required.
 
 ## Version 2.1.3
