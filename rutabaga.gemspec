@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'turnip', ['~> 2.1','>= 2.1.1']
   gem.add_runtime_dependency 'rspec', '~> 3.4.0'
-  gem.add_runtime_dependency 'activesupport'
+  gem.add_runtime_dependency 'activesupport', '~> 4.0'
 
   gem.add_development_dependency 'capybara'
   gem.add_development_dependency 'rack', '~> 1.6'
