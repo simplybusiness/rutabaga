@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in rutabaga.gemspec
 gemspec
 
-unless RUBY_PLATFORM
+platform :ruby do
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-stack_explorer'

@@ -1,5 +1,9 @@
 # Changes
 
+## Version 2.1.5
+
+- Support for Rspec 3.5 is fixed
+
 ## Version 2.1.4
 
 - Locked to Rspec versions between 3 and 3.4 as currently 3.5 is not supported
