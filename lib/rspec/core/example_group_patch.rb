@@ -18,11 +18,11 @@ class RSpec::Core::ExampleGroup
   class << self
     alias_method :orig_subclass, :subclass
 
-    def subclass(parent, description, args, registration_collection, &example_group_block)
-      rutabaga = args.any? { |arg| arg.kind_of?(Hash) && arg[:rutabaga] }
+    def subclass(parent, description, *all_args, &example_group_block)
+      rutabaga = all_args.first.any? { |arg| arg.kind_of?(Hash) && arg[:rutabaga] }
 
-      self.orig_subclass(parent, description, args, registration_collection, &example_group_block).tap do |describe|
-        Rutabaga::ExampleGroup::Feature.feature(describe, description, args) if rutabaga
+      self.orig_subclass(parent, description, *all_args, &example_group_block).tap do |describe|
+        Rutabaga::ExampleGroup::Feature.feature(describe, description, all_args.last) if rutabaga
       end
     end
   end
