@@ -17,7 +17,8 @@ Gem::Specification.new do |gem|
   gem.license       = 'MIT'
 
   gem.add_runtime_dependency 'turnip', ['~> 2.1','>= 2.1.1']
-  gem.add_runtime_dependency 'activesupport'
+  gem.add_runtime_dependency 'rspec', ['>= 3.0', '< 3.5']
+
   gem.add_development_dependency 'capybara'
   gem.add_development_dependency 'pry', '~> 0'
 end
