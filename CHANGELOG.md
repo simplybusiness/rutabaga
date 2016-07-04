@@ -1,5 +1,10 @@
 # Changes
 
+## Version 2.1.4
+
+- Locked to Rspec versions between 3 and 3.4
+- Removed activesupport dependency as no longer required.
+
 ## Version 2.1.3
 
 - Fixes ability for parallel_tests to handle turnip output, even when rutabaga is used. This has been broken since version 2.0
