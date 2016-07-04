@@ -11,7 +11,7 @@ unless RUBY_PLATFORM
 end
 
 # Gem a dependency of Capybara, new version of rack 2.0 onwards require ruby 2.2 and above.
-if RUBY_VERSION < "2.2.2"
+if RUBY_VERSION.to_f < 2.2
   gem 'rack', '~> 1.6'
 else
   gem 'rack'
