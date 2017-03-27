@@ -173,7 +173,7 @@ The goal is to test just the business rule in Rutabaga, and not the login, the h
 
 Use `gem-release` to maintain versions https://github.com/svenfuchs/gem-release.
 
-To update the minor version (e.g. 0.0.1 to 0.0.2), after merging the PR to `master` run:
+To update the patch version (e.g. 0.0.1 to 0.0.2), after merging the PR to `master` run:
 
 ```
 gem bump --tag --release
