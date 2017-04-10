@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = Rutabaga::VERSION
   gem.license       = 'MIT'
 
-  gem.add_runtime_dependency 'turnip', ['~> 2.1','>= 2.1.1']
+  gem.add_runtime_dependency 'turnip', ['>= 2.1.1', '< 4.0']
   gem.add_runtime_dependency 'rspec', ['~> 3.0']
 
   gem.add_development_dependency 'capybara'
