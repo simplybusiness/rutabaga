@@ -30,7 +30,8 @@ module Rutabaga
 
     # Adapted from jnicklas/turnip v2.0.0
     def run(feature_file, example_group_class)
-      Turnip::Builder.build(feature_file).features.each do |feature|
+      features = Util.build_features(feature_file)
+      features.each do |feature|
         describe = example_group_class.describe feature.name, feature.metadata_hash
         run_feature(describe, feature, feature_file, example_group_class)
       end
