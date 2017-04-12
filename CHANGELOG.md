@@ -1,5 +1,10 @@
 # Changes
 
+## Version 2.1.6
+
+- Support for Turnip 3.0
+- Dropped testing for older ruby versions
+
 ## Version 2.1.5
 
 - Support for Rspec 3.5 is fixed
