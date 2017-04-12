@@ -3,11 +3,7 @@
 # Monkey patch for Turnip to not have to copy loads of code
 module Turnip::RSpec
   def self.rutabaga_run(feature_file, example_group_class)
-    if Gem::Version.new(Turnip::VERSION) >= Gem::Version.new('3.0.0')
-      features = [Turnip::Builder.build(feature_file)]
-    else
-      features = Turnip::Builder.build(feature_file).features
-    end
+    features = Rutabaga::Util.build_features(feature_file)
     features.each do |feature|
       instance_eval <<-EOS, feature_file, feature.line
         describe = example_group_class.describe feature.name, feature.metadata_hash.reject { |key, _| key == :type }
@@ -46,6 +42,14 @@ module Rutabaga
       rescue LoadError => e
         # Don't hide LoadErrors raised in the spec helper.
         raise unless e.message.include?(filename)
+      end
+
+      def build_features(feature_file)
+        if Gem::Version.new(Turnip::VERSION) >= Gem::Version.new('3.0.0')
+          [Turnip::Builder.build(feature_file)]
+        else
+          Turnip::Builder.build(feature_file).features
+        end
       end
 
       private

@@ -30,11 +30,7 @@ module Rutabaga
 
     # Adapted from jnicklas/turnip v2.0.0
     def run(feature_file, example_group_class)
-      if Gem::Version.new(Turnip::VERSION) >= Gem::Version.new('3.0.0')
-        features = [Turnip::Builder.build(feature_file)]
-      else
-        features = Turnip::Builder.build(feature_file).features
-      end
+      features = Util.build_features(feature_file)
       features.each do |feature|
         describe = example_group_class.describe feature.name, feature.metadata_hash
         run_feature(describe, feature, feature_file, example_group_class)

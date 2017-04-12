@@ -104,26 +104,26 @@ describe Rutabaga::Util do
       it "has a nil description" do
         @description = nil
 
-        expect{subject}.to raise_error(/Feature file not found\. Tried: [\\\/\w]*\/spec\/rutabaga\/util\.feature/)
+        expect{subject}.to raise_error(/Feature file not found\. Tried: .*\/spec\/rutabaga\/util\.feature/)
       end
 
       it "has a sentance description" do
         @description = "my life as a dog"
 
-        expect{subject}.to raise_error(/Feature file not found\. Tried: [\\\/\w]*\/spec\/rutabaga\/util\.feature/)
+        expect{subject}.to raise_error(/Feature file not found\. Tried: .*\/spec\/rutabaga\/util\.feature/)
       end
 
       it "has a filename description but the file doesn't exist" do
         @description = "example.feature"
 
-        expect{subject}.to raise_error(/Feature file not found\. Tried: example\.feature, [\\\/\w]*example\.feature/)
+        expect{subject}.to raise_error(/Feature file not found\. Tried: example\.feature, .*example\.feature/)
       end
 
       it "raises an error if the filename does not end in feature" do
         @description = "example.other"
         allow(File).to receive(:exists?).with(@description).and_return(true)
 
-        expect{subject}.to raise_error(/Feature file not found\. Tried: [\\\/\w]*\/spec\/rutabaga\/util\.feature/)
+        expect{subject}.to raise_error(/Feature file not found\. Tried: .*\/spec\/rutabaga\/util\.feature/)
       end
     end
   end
