@@ -1,5 +1,11 @@
 # Changes
 
+## Version 3.0.0
+
+- Adds Turnip 4 support
+- Removes Turnip 2 support
+- Removes deprecated way of calling features
+
 ## Version 2.1.6
 
 - Support for Turnip 3.0
