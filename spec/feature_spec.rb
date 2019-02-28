@@ -30,7 +30,7 @@ describe 'integration', :type => :integration do
     end
 
     it "prints out failures and successes" do
-      expect(@result).to include('19 examples, 4 failures')
+      expect(@result).to include('18 examples, 4 failures')
     end
 
     it "should find features relative to the root" do
@@ -48,10 +48,6 @@ describe 'integration', :type => :integration do
 
     it "should provide failure messages that allow a specific scenario to be run" do
       expect(@result).to include("rspec ./examples/test_feature_example_group_spec.rb[1:1:1:4:1]")
-    end
-
-    it "should have a feature deprecation warning" do
-      expect(@result).to include("Calling `feature` from an `it` block is deprecated.")
     end
   end
 

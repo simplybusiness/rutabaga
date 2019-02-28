@@ -7,6 +7,6 @@ rvm:
 
 gemfile:
   - Gemfile
-  - ./Gemfile.turnip2
+  - ./Gemfile.turnip3
 
 script: bundle exec rspec spec
