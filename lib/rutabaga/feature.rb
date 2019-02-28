@@ -30,14 +30,14 @@ module Rutabaga
 
     # Adapted from jnicklas/turnip v2.0.0
     def run(feature_file, example_group_class)
-      features = Util.build_features(feature_file)
+      features = Util.build_scenario_groups(feature_file)
       features.each do |feature|
         describe = example_group_class.describe feature.name, feature.metadata_hash
-        run_feature(describe, feature, feature_file, example_group_class)
+        run_scenario_group(describe, feature, feature_file, example_group_class)
       end
     end
 
-    def run_feature(describe, feature, filename, example_group_class)
+    def run_scenario_group(describe, feature, filename, example_group_class)
       example_group_class.before do
         # This is kind of a hack, but it will make RSpec throw way nicer exceptions
         RSpec.current_example.metadata[:file_path] = filename
@@ -57,5 +57,6 @@ module Rutabaga
         end
       end
     end
+    alias_method :run_feature, :run_scenario_group # Turnip 3 support
   end
 end
