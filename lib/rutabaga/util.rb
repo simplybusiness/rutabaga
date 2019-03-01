@@ -7,11 +7,11 @@ module Turnip::RSpec
     features.each do |feature|
       instance_eval <<-EOS, feature_file, feature.line
         describe = example_group_class.describe feature.name, feature.metadata_hash.reject { |key, _| key == :type }
-        # if Turnip::RSpec.instance_methods(false).include?(:run_scenario_group)
+        if Turnip::VERSION[0].to_i >= 4
           run_scenario_group(describe, feature, feature_file)
-        # else # run against turnip 3
-        #   run_feature(describe, feature, feature_file)
-        # end
+        else # run against turnip 3
+          run_feature(describe, feature, feature_file)
+        end
       EOS
     end
   end
