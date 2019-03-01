@@ -7,7 +7,11 @@ module Turnip::RSpec
     features.each do |feature|
       instance_eval <<-EOS, feature_file, feature.line
         describe = example_group_class.describe feature.name, feature.metadata_hash.reject { |key, _| key == :type }
-        run_scenario_group(describe, feature, feature_file)
+        # if Turnip::RSpec.instance_methods(false).include?(:run_scenario_group)
+          run_scenario_group(describe, feature, feature_file)
+        # else # run against turnip 3
+        #   run_feature(describe, feature, feature_file)
+        # end
       EOS
     end
   end
@@ -67,7 +71,6 @@ module Rutabaga
 end
 
 ::RSpec.configure do |c|
-  c.include Rutabaga::Feature
   # Blow away turnip's pattern, and focus just on features directory
   if defined?(Rutabaga::NO_TURNIP)
     c.pattern.gsub!(",**/*.feature", "")
