@@ -199,9 +199,9 @@ Put the following (example in a `Gemfile_for_xxx`) to test other versions of gem
 # Use global Gemfile and customize
 eval(IO.read('Gemfile'), binding)
 
-gem 'turnip', '2.0.0'
+gem 'turnip', '3.1.0'
 ```
 
 ## Copyright
 
-Copyright © 2012-2016 Simply Business. See LICENSE for details.
+Copyright © 2012-2019 Simply Business. See LICENSE for details.

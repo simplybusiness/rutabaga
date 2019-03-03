@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe "should find the feature file using the root (and monkey patching the result)" do
-  it "examples/test2.feature" do
-    feature
-  end
+  feature "examples/test2.feature"
 
   step "that :first + :second is calculated" do |first, second|
     @first = first

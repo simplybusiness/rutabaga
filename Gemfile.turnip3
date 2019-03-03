@@ -2,4 +2,4 @@ source 'https://rubygems.org'
 
 eval_gemfile File.join(File.dirname(__FILE__), "Gemfile")
 
-gem 'turnip', '2.1.1'
+gem 'turnip', '3.1.0'
