@@ -176,19 +176,25 @@ Use `gem-release` to maintain versions https://github.com/svenfuchs/gem-release.
 To update the patch version (e.g. 0.0.1 to 0.0.2), after merging the PR to `master` run:
 
 ```
-gem bump --tag --release
+gem bump --tag --release --push
 ```
 
 if instead you want to bump the minor version (e.g. 0.0.1 to 0.1.0):
 
 ```
-gem bump --version minor --tag --release
+gem bump --version minor --tag --release --push
 ```
 
 or major version (e.g. 0.0.1 to 1.0.0):
 
 ```
-gem bump --version major --tag --release
+gem bump --version major --tag --release --push
+```
+
+If you've updated the version already, after merging to `master` run:
+
+```
+gem release --tag --push
 ```
 
 ## Testing alternate versions
