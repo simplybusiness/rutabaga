@@ -57,16 +57,11 @@ describe 'integration', :type => :integration do
     end
 
     it "passes all tests" do
-      expect(@result).to include('2 examples, 0 failures')
+      expect(@result).to include('1 example, 0 failures')
     end
 
     it "runs feature blocks even if capybara/rspec is installed" do
       expect(@result).to include("capaybara rails does not overwrite the feature command")
     end
-
-    it "preserves the type from the surrounding describe blocks (for example rspec rails example groups)" do
-      expect(@result).to include("feature metadata type is preserved as parent_group")
-    end
-
   end
 end
