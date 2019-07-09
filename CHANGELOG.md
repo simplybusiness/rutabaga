@@ -1,5 +1,9 @@
 # Changes
 
+## Version 3.0.1
+
+- Removes legacy compatibility hack which stops `capybara-screenshot` from working.
+
 ## Version 3.0.0
 
 - Adds Turnip 4 support
