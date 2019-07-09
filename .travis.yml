@@ -11,8 +11,6 @@ gemfile:
 
 matrix:
   allow_failures:
-  - rvm: 2.6 # Google protobuf, requirement for turnip 4 not compatible yet
-    gemfile: Gemfile
   - rvm: jruby # Google protobuf, requirement for turnip 4 not compatible yet
     gemfile: Gemfile
 

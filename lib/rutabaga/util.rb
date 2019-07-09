@@ -6,7 +6,7 @@ module Turnip::RSpec
     features = Rutabaga::Util.build_scenario_groups(feature_file)
     features.each do |feature|
       instance_eval <<-EOS, feature_file, feature.line
-        describe = example_group_class.describe feature.name, feature.metadata_hash.reject { |key, _| key == :type }
+        describe = example_group_class.describe feature.name, feature.metadata_hash
         if Turnip::VERSION[0].to_i >= 4
           run_scenario_group(describe, feature, feature_file)
         else # run against turnip 3
