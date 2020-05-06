@@ -7,7 +7,6 @@ rvm:
 
 gemfile:
   - Gemfile
-  - ./Gemfile.turnip3
 
 matrix:
   allow_failures:
