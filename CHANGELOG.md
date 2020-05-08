@@ -1,5 +1,10 @@
 # Changes
 
+## Version 3.0.2
+
+- Implement auto deploy
+- Remove support for ruby 2.4
+
 ## Version 3.0.1
 
 - Removes legacy compatibility hack which stops `capybara-screenshot` from working.
