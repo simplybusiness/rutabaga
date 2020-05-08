@@ -8,7 +8,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-        ruby: [2.4, 2.5, 2.6, 2.7, jruby]
+        ruby: [2.5, 2.6, 2.7, jruby]
         gemfile: [Gemfile, Gemfile.turnip3]
     runs-on: ${{ matrix.os }}
     steps:
