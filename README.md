@@ -171,31 +171,9 @@ The goal is to test just the business rule in Rutabaga, and not the login, the h
 
 ## For maintainers
 
-Use `gem-release` to maintain versions https://github.com/svenfuchs/gem-release.
-
-To update the patch version (e.g. 0.0.1 to 0.0.2), after merging the PR to `master` run:
-
-```
-gem bump --tag --release --push
-```
-
-if instead you want to bump the minor version (e.g. 0.0.1 to 0.1.0):
-
-```
-gem bump --version minor --tag --release --push
-```
-
-or major version (e.g. 0.0.1 to 1.0.0):
-
-```
-gem bump --version major --tag --release --push
-```
-
-If you've updated the version already, after merging to `master` run:
-
-```
-gem release --tag --push
-```
+To release a new version of the gem, bump the version in `lib/rutabaga/version.rb`
+using Semantic Versioning and merge to master. This will trigger a new version to
+be deployed.
 
 ## Testing alternate versions
 
@@ -210,4 +188,4 @@ gem 'turnip', '3.1.0'
 
 ## Copyright
 
-Copyright © 2012-2019 Simply Business. See LICENSE for details.
+Copyright © 2012-2020 Simply Business. See LICENSE for details.
