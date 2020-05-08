@@ -27,6 +27,6 @@ jobs:
         git config --global user.email ${{ github.event.pusher.email }}
         git config --global user.name  ${{ github.event.pusher.name }}
         printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-        gem release --tag --push --pretend
+        gem release --tag --push
       env:
         GEM_HOST_API_KEY: ${{secrets.RUBYGEMS_AUTH_TOKEN}}
