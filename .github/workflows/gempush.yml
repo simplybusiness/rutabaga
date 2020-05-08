@@ -24,7 +24,9 @@ jobs:
         mkdir -p $HOME/.gem
         touch $HOME/.gem/credentials
         chmod 0600 $HOME/.gem/credentials
+        git config --global user.email ${{ github.event.push.pusher.email }}
+        git config --global user.name  ${{ github.event.push.pusher.name }}
         printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-        gem release --tag --push
+        gem release --tag --push --pretend
       env:
         GEM_HOST_API_KEY: ${{secrets.RUBYGEMS_AUTH_TOKEN}}
