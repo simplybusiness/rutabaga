@@ -47,7 +47,7 @@ describe 'integration', :type => :integration do
     end
 
     it "should provide failure messages that allow a specific scenario to be run" do
-      expect(@result).to include("rspec ./examples/test_feature_example_group_spec.rb[1:1:1:4:1]")
+      expect(@result).to match(/rspec '{0,1}.\/examples\/test_feature_example_group_spec.rb\[1:1:1:4:1\]'{0,1}/)
     end
   end
 
