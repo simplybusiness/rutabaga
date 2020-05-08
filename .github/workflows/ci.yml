@@ -9,6 +9,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         ruby: [2.4, 2.5, 2.6, 2.7, jruby, truffleruby-head]
+        gemfile: [Gemfile, Gemfile.turnip3]
     runs-on: ${{matrix.os}}
     steps:
     - uses: actions/checkout@v2
@@ -20,13 +21,13 @@ jobs:
     - uses: actions/cache@v1
       with:
         path: vendor/bundle
-        key: bundle-use-ruby-${{matrix.os}}-${{matrix.ruby}}-${{hashFiles('**/Gemfile')}}
+        key: bundle-use-ruby-${{matrix.os}}-${{matrix.ruby}}-${{hashFiles('**/${{matrix.gemfile}}')}}
         restore-keys: |
-          bundle-use-ruby-${{matrix.os}}-${{matrix.ruby}}-
+          bundle-use-ruby-${{matrix.os}}-${{matrix.ruby}}-${{hashFiles('**/${{matrix.gemfile}}')}}
 
     - name: Bundle install...
       run: |
         bundle config path vendor/bundle
-        bundle install
+        bundle install --gemfile=${{matrix.gemfile}}
 
     - run: bundle exec rspec spec
