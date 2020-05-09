@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rutabaga'
 ##
 #
@@ -8,8 +10,8 @@ module Turnip
     module Loader
       def load(*a, &b)
         if a.first.end_with?('.feature')
-          if legal_directories.none? {|d| a.first.end_with? d }
-            ::RSpec.warning "Features can only be called from turnip enable directories. These are configured " \
+          if legal_directories.none? { |d| a.first.end_with? d }
+            ::RSpec.warning 'Features can only be called from turnip enable directories. These are configured ' \
                             "in RSpec.configuration.pattern which is currently '#{::RSpec.configuration.pattern}'"
           else
             require_if_exists 'turnip_helper'
@@ -26,9 +28,9 @@ module Turnip
 
       def legal_directories
         @legal_directories ||= ::RSpec.configuration.pattern.split(',')
-          .select {|p| /\.feature\Z/ =~ p}
-          .map {|d| Dir.glob(File.join(::RSpec.configuration.default_path,d)) }
-          .flatten
+                                      .select { |p| /\.feature\Z/ =~ p }
+                                      .map { |d| Dir.glob(File.join(::RSpec.configuration.default_path, d)) }
+                                      .flatten
       end
     end
   end

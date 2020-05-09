@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Utils and monkey patches for both versions of feature
 
 # Monkey patch for Turnip to not have to copy loads of code
@@ -24,16 +26,18 @@ module Rutabaga
         tried = []
 
         if description =~ /.*\.(feature|rutabaga)\Z/
-          return description if File.exists?(description)
+          return description if File.exist?(description)
+
           tried << description
 
           candidate = File.join(extract_directory, description)
-          return candidate if File.exists?(candidate)
+          return candidate if File.exist?(candidate)
+
           tried << candidate
         else
           feature_files = extract_features
           feature_files.each do |feature_file|
-            return feature_file if File.exists?(feature_file)
+            return feature_file if File.exist?(feature_file)
           end
           tried += feature_files
         end
@@ -57,14 +61,14 @@ module Rutabaga
       def extract_directory
         caller(0).find do |call|
           call =~ /_spec.rb:/
-        end.gsub(/\/[^\/]+_spec.rb:.*\Z/, '')
+        end.gsub(%r{/[^/]+_spec.rb:.*\Z}, '')
       end
 
       def extract_features
         base = caller(0).find do |call|
           call =~ /_spec.rb:/
         end.gsub(/_spec.rb:.*\Z/, '')
-        [base+'.feature', base+'.rutabaga']
+        [base + '.feature', base + '.rutabaga']
       end
     end
   end
@@ -73,8 +77,8 @@ end
 ::RSpec.configure do |c|
   # Blow away turnip's pattern, and focus just on features directory
   if defined?(Rutabaga::NO_TURNIP)
-    c.pattern.gsub!(",**/*.feature", "")
+    c.pattern.gsub!(',**/*.feature', '')
   else
-    c.pattern.gsub!(",**/*.feature", ",features/**/*.feature")
+    c.pattern.gsub!(',**/*.feature', ',features/**/*.feature')
   end
 end
