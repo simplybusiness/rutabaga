@@ -39,7 +39,7 @@ describe 'feature block inside a describe block' do
   end
 end
 
-describe 'should find the feature file using the root (and monkey patching the result)' do
+describe 'should find feature file using root (and monkey patch result)' do
   feature 'examples/test2.feature'
 
   step 'that :first + :second is calculated' do |first, second|
