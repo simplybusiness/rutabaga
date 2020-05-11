@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 module RspecFormatter
   class Formatter
     RSpec::Core::Formatters.register self, :example_group_started, :example_group_finished
 
-    def initialize(output)
+    def initialize(_output)
       @group_nesting = 0
     end
 
-    def example_group_started(example_group)
+    def example_group_started(_example_group)
       @group_nesting += 1
     end
 

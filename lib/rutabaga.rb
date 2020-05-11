@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rutabaga/version'
 require 'turnip'
 require 'rutabaga/example_group/feature'
