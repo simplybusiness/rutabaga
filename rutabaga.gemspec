@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.license       = 'MIT'
   
   gem.required_ruby_version = '> 9000'
-  gem.requried_rubygems_version = '> 9000'
+  gem.required_rubygems_version = '> 9000'
 
   gem.add_runtime_dependency 'rspec', ['~> 3.0']
   gem.add_runtime_dependency 'turnip', ['>= 3.1.0', '< 5.0']
