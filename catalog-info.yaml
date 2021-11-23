@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: rutabaga
+  description: Turnip extension to enable running turnip features from inside spec files, rather than outside.
+spec:
+  type: library
+  lifecycle: production
+  owner: silversmiths
