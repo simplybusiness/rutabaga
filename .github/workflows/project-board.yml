@@ -1,0 +1,17 @@
+name: Automatically add new Issues to Silversmith's GitHub project board
+# https://github.com/orgs/simplybusiness/projects/3
+# New issues in this repository will be added to the board.
+on:
+  issues:
+    types: [ opened, reopened ]
+
+jobs:
+  track_issues:
+    uses: simplybusiness/github-action-reusable-workflows/.github/workflows/project-board.yaml@master
+    with:
+      pr-id: ${{ github.event.issue.node_id }}
+      project-number: 3
+      org: simplybusiness
+      actor: ${{ github.actor }}
+    secrets:
+      github-token: ${{ secrets.SILVERSMITHS_PROJECT_MANAGEMENT }}
