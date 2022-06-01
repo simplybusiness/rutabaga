@@ -1,0 +1,36 @@
+name: Huxley- Master Only Deploy - Rutabaga
+
+on:
+  push:
+    branches:
+      - 'master'
+
+concurrency: huxley-ci-${{ github.ref }}
+
+env:
+  REPOSITORY: "rutabaga"
+
+permissions:
+  contents: write
+
+jobs:
+  Build_Gem:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id    : ${{ secrets.AWS_LIVE_CICD_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_LIVE_CICD_SECRET_ACCESS_KEY }}
+          aws-region           : ${{ secrets.AWS_LIVE_CICD_REGION }}
+      - name: Build Gem
+        uses: aws-actions/aws-codebuild-run-build@v1
+        with:
+          project-name: ${{ env.REPOSITORY }}
+          buildspec-override: _pipeline/stage_build_gem.yml
+          env-vars-for-codebuild: SLACK_MESSAGE_PRE_NOTIFY, NOTICE_COLOR_PRE_NOTIFY, SLACK_MESSAGE_POST_NOTIFY, NOTICE_COLOR_POST_NOTIFY
+        env:
+          SLACK_MESSAGE_PRE_NOTIFY: "Starting build for rutabaga"
+          NOTICE_COLOR_PRE_NOTIFY: 'INFO'
+          SLACK_MESSAGE_POST_NOTIFY: "rutabaga build is finished for"
+          NOTICE_COLOR_POST_NOTIFY: 'SUCCESS'

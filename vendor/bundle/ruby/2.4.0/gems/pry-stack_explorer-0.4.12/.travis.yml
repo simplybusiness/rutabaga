@@ -1,0 +1,27 @@
+language: ruby
+
+script:
+  rake test --trace
+
+before_install:
+  - gem update --system
+
+rvm:
+  - 2.5.3
+  - 2.6.6
+  - 2.7.1
+  - ruby-head
+
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+  fast_finish: true
+
+notifications:
+  irc: "irc.freenode.org#pry"
+  email:
+    - jrmair@gmail.com
+
+branches:
+  only:
+    - master

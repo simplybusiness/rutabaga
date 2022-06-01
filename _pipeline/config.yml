@@ -1,0 +1,4 @@
+global:
+  SEMAPHORE_V2_PROJECT_ID: 'd80890a4-bf34-4b5f-8adc-522cc64bc680'
+  APP_NAME: 'rutabaga'
+  APP_SLACK_DEPLOYMENT_CHANNEL: 'silversmiths-alerts'

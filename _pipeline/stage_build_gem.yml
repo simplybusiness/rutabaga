@@ -1,0 +1,8 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - docker_setup # require for bnw setup
+  build:
+    commands:
+      - run_huxley 'slack_pre_notification_on_master_gem_version' 'check_semaphore_v2_before_proceeding' 'gem_deploy rutabaga.gemspec' 'send_notifications' 'slack_post_notification_on_master_gem_version'

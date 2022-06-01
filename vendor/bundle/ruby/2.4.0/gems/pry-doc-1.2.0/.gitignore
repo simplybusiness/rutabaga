@@ -1,0 +1,16 @@
+Makefile
+*.so
+*.o
+*.def
+doc/
+pkg/
+.yardoc/
+*.gem
+Gemfile.lock
+*~
+sample.bundle
+
+.bundle/
+vendor/bundle/
+
+rubies

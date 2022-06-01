@@ -1,0 +1,8 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - docker_setup # require for bnw setup
+  build:
+    commands:
+      - run_huxley 'check_semaphore_v2_before_proceeding' 'gem_deploy rutabaga.gemspec' 'send_notifications'

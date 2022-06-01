@@ -1,0 +1,14 @@
+current directory: /Users/jenah.blitz/workspace/rutabaga/vendor/bundle/ruby/2.4.0/gems/interception-0.5/ext
+/Users/jenah.blitz/.rbenv/versions/2.4.4/bin/ruby -r ./siteconf20211123-74470-1ynjbin.rb extconf.rb
+
+current directory: /Users/jenah.blitz/workspace/rutabaga/vendor/bundle/ruby/2.4.0/gems/interception-0.5/ext
+make "DESTDIR=" clean
+make: *** No rule to make target `clean'.  Stop.
+
+current directory: /Users/jenah.blitz/workspace/rutabaga/vendor/bundle/ruby/2.4.0/gems/interception-0.5/ext
+make "DESTDIR="
+:
+
+current directory: /Users/jenah.blitz/workspace/rutabaga/vendor/bundle/ruby/2.4.0/gems/interception-0.5/ext
+make "DESTDIR=" install
+:
