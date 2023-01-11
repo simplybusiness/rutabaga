@@ -2,6 +2,18 @@
 
 ## Version 3.0.2
 
+- Fix a bug in Ruby 3.2
+- Test against Ruby 3.1 and 3.2
+- Stop testing against 2.5 and 2.6
+
+## Version 3.0.2
+
+- Implement auto deploy
+- Remove support for ruby 2.4
+
+
+## Version 3.0.2
+
 - Implement auto deploy
 - Remove support for ruby 2.4
 
