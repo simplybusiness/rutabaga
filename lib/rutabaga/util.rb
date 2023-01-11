@@ -25,7 +25,7 @@ module Rutabaga
       def find_feature(description)
         tried = []
 
-        if description =~ /.*\.(feature|rutabaga)\Z/
+        if description.respond_to?(:=~) && description =~ /.*\.(feature|rutabaga)\Z/
           return description if File.exist?(description)
 
           tried << description
