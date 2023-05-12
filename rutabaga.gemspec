@@ -22,4 +22,5 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'capybara'
   gem.add_development_dependency 'pry', '~> 0'
+  gem.add_development_dependency 'simplycop'
 end

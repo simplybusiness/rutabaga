@@ -1,0 +1,6 @@
+inherit_gem:
+  simplycop: .simplycop.yml
+
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
