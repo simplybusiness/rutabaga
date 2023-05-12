@@ -10,7 +10,7 @@ class RSpec::Core::Configuration
   alias orig_alias_example_group_to alias_example_group_to
 
   def alias_example_group_to(new_name, *args)
-    return if %i[feature xfeature ffeature].include?(new_name)
+    return if [:feature, :xfeature, :ffeature].include?(new_name)
 
     orig_alias_example_group_to(new_name, *args)
   end

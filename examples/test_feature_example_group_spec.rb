@@ -104,6 +104,6 @@ describe 'backgrounds are properly called' do
   end
 
   step 'my result is :result' do |result|
-    expect(@initial.to_i + @first.to_i * @second.to_i).to eq(result.to_i)
+    expect(@initial.to_i + (@first.to_i * @second.to_i)).to eq(result.to_i)
   end
 end
