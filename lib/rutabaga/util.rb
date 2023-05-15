@@ -68,7 +68,7 @@ module Rutabaga
         base = caller(0).find do |call|
           call =~ /_spec.rb:/
         end.gsub(/_spec.rb:.*\Z/, '')
-        [base + '.feature', base + '.rutabaga']
+        ["#{base}.feature", "#{base}.rutabaga"]
       end
     end
   end

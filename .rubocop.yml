@@ -1,0 +1,8 @@
+inherit_from: .rubocop_todo.yml
+
+inherit_gem:
+  simplycop: .simplycop.yml
+
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
