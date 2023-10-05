@@ -3,8 +3,8 @@
 require File.expand_path('lib/rutabaga/version', __dir__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ['Lukas Oberhuber']
-  gem.email         = ['lukas.oberhuber@simplybusiness.co.uk']
+  gem.authors       = ['Simply Business']
+  gem.email         = ['opensource@simplybusiness.co.uk']
   gem.description   = 'Allows using feature from within RSpec and is built on top of Turnip'
   gem.summary       = 'Calling Turnip feature files from RSpec, which allows encapsulating a feature inside a describe block'
   gem.homepage      = 'https://github.com/simplybusiness/rutabaga'
@@ -17,10 +17,12 @@ Gem::Specification.new do |gem|
   gem.version       = Rutabaga::VERSION
   gem.license       = 'MIT'
 
+  gem.add_runtime_dependency 'activesupport', ['< 7.1.0']
   gem.add_runtime_dependency 'rspec', ['~> 3.0']
   gem.add_runtime_dependency 'turnip', ['>= 3.1.0', '< 4.4']
 
   gem.add_development_dependency 'capybara'
   gem.add_development_dependency 'pry', '~> 0'
   gem.add_development_dependency 'simplycop'
+
 end
