@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rutabaga/version'
+require 'active_support'
 require 'turnip'
 require 'rutabaga/example_group/feature'
 require 'rspec/core/example_group_patch'
