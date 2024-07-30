@@ -11,18 +11,18 @@ Gem::Specification.new do |gem|
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
-  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.name          = 'rutabaga'
   gem.require_paths = ['lib']
   gem.version       = Rutabaga::VERSION
   gem.license       = 'MIT'
 
-  gem.add_runtime_dependency 'activesupport'
-  gem.add_runtime_dependency 'rspec', ['~> 3.0']
-  gem.add_runtime_dependency 'turnip', ['>= 3.1.0', '< 4.4']
+  gem.required_ruby_version = ['>= 3.1', '< 3.4']
+
+  gem.add_dependency 'activesupport'
+  gem.add_dependency 'rspec', ['~> 3.0']
+  gem.add_dependency 'turnip', ['>= 3.1.0', '< 4.4']
 
   gem.add_development_dependency 'capybara'
   gem.add_development_dependency 'pry', '~> 0'
   gem.add_development_dependency 'simplycop'
-
 end

@@ -12,7 +12,7 @@ require 'rutabaga'
 module Turnip
   module RSpec
     module Loader
-      def load(*a, &b)
+      def load(*a, &)
         if a.first.end_with?('.feature')
           ::RSpec.warning 'Calling features directly has been disabled by rutabaga. To re-enable, do not require rutabaga/no_turnip.'
         else

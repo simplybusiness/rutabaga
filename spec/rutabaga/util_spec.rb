@@ -18,6 +18,7 @@ describe Rutabaga::Util do
 
   describe '.find_feature' do
     let(:subject) { Rutabaga::Util.find_feature(@description) }
+
     before do
       allow(File).to receive(:exist?).with('spec/rutabaga/existing.feature').and_return(true)
       allow(File).to receive(:exist?).with('spec/rutabaga/missing.feature').and_return(false)

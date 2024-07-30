@@ -3,6 +3,8 @@ kind: Component
 metadata:
   name: rutabaga
   description: Turnip extension to enable running turnip features from inside spec files, rather than outside.
+  annotations:
+    rubygems.org/name: rutabaga
 spec:
   type: library
   lifecycle: production
