@@ -1,15 +1,7 @@
 version: 2
-registries:
-  github-octocat:
-    type: git
-    url: https://github.com
-    username: x-access-token
-    password: ${{secrets.X_BOT_ORG_REPO_ONLY_TOKEN}}
 updates:
   - package-ecosystem: github-actions
     directory: "/"
-    registries:
-      - github-octocat
     schedule:
       interval: weekly
       day: monday
