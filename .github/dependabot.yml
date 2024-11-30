@@ -5,6 +5,20 @@ updates:
     schedule:
       interval: weekly
       day: monday
-      time: "06:00"
+      time: "07:30"
       timezone: "Europe/London"
     open-pull-requests-limit: 99
+  - package-ecosystem: bundler
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:30"
+    open-pull-requests-limit: 99
+    allow:
+      - dependency-type: "all"
+    groups:
+      code-quality-dependencies:
+        patterns:
+          - "rubocop*"
+          - "simplycop"
