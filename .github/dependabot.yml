@@ -1,18 +1,26 @@
 version: 2
-registries:
-  github-octocat:
-    type: git
-    url: https://github.com
-    username: x-access-token
-    password: ${{secrets.X_BOT_ORG_REPO_ONLY_TOKEN}}
+
 updates:
   - package-ecosystem: github-actions
     directory: "/"
-    registries:
-      - github-octocat
     schedule:
       interval: weekly
       day: monday
-      time: "06:00"
+      time: "07:30"
       timezone: "Europe/London"
     open-pull-requests-limit: 99
+  - package-ecosystem: bundler
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:30"
+    open-pull-requests-limit: 99
+    allow:
+      # Allow both direct and indirect updates for all packages
+      - dependency-type: "all"
+    groups:
+      code-quality-dependencies:
+        patterns:
+          - "rubocop*"
+          - "simplycop"
