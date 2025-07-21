@@ -17,12 +17,11 @@ Gem::Specification.new do |gem|
   gem.version       = Rutabaga::VERSION
   gem.license       = 'MIT'
 
-  gem.add_runtime_dependency 'activesupport'
-  gem.add_runtime_dependency 'rspec', ['~> 3.0']
-  gem.add_runtime_dependency 'turnip', ['>= 3.1.0', '< 4.4']
+  gem.add_dependency 'activesupport'
+  gem.add_dependency 'rspec', ['~> 3.0']
+  gem.add_dependency 'turnip', ['~> 4.4']
 
   gem.add_development_dependency 'capybara'
   gem.add_development_dependency 'pry', '~> 0'
   gem.add_development_dependency 'simplycop'
-
 end
