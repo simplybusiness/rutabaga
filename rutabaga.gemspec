@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'activesupport'
   gem.add_dependency 'rspec', ['~> 3.0']
-  gem.add_dependency 'turnip', ['~> 4.4']
+  gem.add_dependency 'turnip', ['>= 3.1.0', '< 5.0.0']
 
   gem.add_development_dependency 'capybara'
   gem.add_development_dependency 'pry', '~> 0'
