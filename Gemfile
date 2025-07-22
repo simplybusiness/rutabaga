@@ -12,4 +12,4 @@ platform :ruby do
   gem 'pry-stack_explorer'
 end
 
-gem 'rack'
+gem "rake", "~> 13.0"
