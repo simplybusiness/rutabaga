@@ -7,26 +7,23 @@ on:
     - 'lib/rutabaga/version.rb'
 
 jobs:
-  build:
-    name: Build + Publish
+  push:
     runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Ruby 3.2
-      uses: actions/setup-ruby@v1
-      with:
-        version: 3.2.x
+    permissions:
+      contents: write
+      id-token: write
 
-    - name: Publish to RubyGems
-      run: |
-        gem install gem-release
-        mkdir -p $HOME/.gem
-        touch $HOME/.gem/credentials
-        chmod 0600 $HOME/.gem/credentials
-        git config --global user.email ${{ github.event.pusher.email }}
-        git config --global user.name  ${{ github.event.pusher.name }}
-        printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-        gem release --tag --push
-      env:
-        GEM_HOST_API_KEY: ${{secrets.RUBYGEMS_AUTH_TOKEN}}
+    steps:
+      # Set up
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: 3.2.x
+
+      # Release
+      - uses: rubygems/release-gem@v1
