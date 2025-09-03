@@ -28,7 +28,7 @@ module Turnip
 
       def legal_directories
         @legal_directories ||= ::RSpec.configuration.pattern.split(',')
-                                      .select { |p| /\.feature\Z/ =~ p }
+                                      .grep(/\.feature\Z/)
                                       .map { |d| Dir.glob(File.join(::RSpec.configuration.default_path, d)) }
                                       .flatten
       end

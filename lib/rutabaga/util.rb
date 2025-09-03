@@ -3,18 +3,20 @@
 # Utils and monkey patches for both versions of feature
 
 # Monkey patch for Turnip to not have to copy loads of code
-module Turnip::RSpec
-  def self.rutabaga_run(feature_file, example_group_class)
-    features = Rutabaga::Util.build_scenario_groups(feature_file)
-    features.each do |feature|
-      instance_eval <<-EOS, feature_file, feature.line
+module Turnip
+  module RSpec
+    def self.rutabaga_run(feature_file, example_group_class)
+      features = Rutabaga::Util.build_scenario_groups(feature_file)
+      features.each do |feature|
+        instance_eval <<-EOS, __FILE__, feature.line
         describe = example_group_class.describe feature.name, feature.metadata_hash
         if Turnip::VERSION[0].to_i >= 4
           run_scenario_group(describe, feature, feature_file)
         else # run against turnip 3
           run_feature(describe, feature, feature_file)
         end
-      EOS
+        EOS
+      end
     end
   end
 end
