@@ -10,10 +10,6 @@ AllCops:
   Exclude:
     - 'vendor/**/*'
 
-RSpec/EmptyExampleGroup:
-  Exclude:
-    - 'examples/**/*'
-
-RSpec/Dialect:
+RSpec:
   Exclude:
     - 'examples/**/*'
