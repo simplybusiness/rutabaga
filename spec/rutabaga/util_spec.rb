@@ -77,7 +77,7 @@ describe Rutabaga::Util do
         expect(found_feature).to match(%r{spec/rutabaga/util\.feature\Z})
       end
 
-      it 'description does not match a feature file' do
+      it 'description does not match a feature file but matches a rutabaga file' do
         @description = 'this is not a feature file'
         allow(File).to receive(:exist?).with(/this is not a feature file/).and_return(false)
 
