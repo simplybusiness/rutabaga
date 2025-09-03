@@ -9,3 +9,11 @@ inherit_gem:
 AllCops:
   Exclude:
     - 'vendor/**/*'
+
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - 'examples/**/*'
+
+RSpec/Dialect:
+  Exclude:
+    - 'examples/**/*'
