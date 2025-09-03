@@ -8,7 +8,7 @@ describe 'no_turnip', type: :integration do
       @result = `rspec -r rutabaga -r rutabaga/no_turnip examples/test.feature 2>&1`
     end
 
-    it 'should raise an error when trying to call turnip features directly' do
+    it 'raises an error when trying to call turnip features directly' do
       expect(@result).to include('Calling features directly has been disabled by rutabaga')
       expect(@result).to include('rutabaga/no_turnip')
     end
@@ -25,7 +25,7 @@ describe 'no_turnip', type: :integration do
 
   describe 'turnip enabled' do
     describe 'in correct directory' do
-      it 'should be able to call features directly' do
+      it 'is able to call features directly' do
         @result = `rspec -r rutabaga/turnip spec/features/fixture.feature 2>&1`
         expect(@result).to include('No such step')
       end
