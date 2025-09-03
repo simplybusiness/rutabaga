@@ -5,19 +5,21 @@ require 'rutabaga'
 
 describe Rutabaga::Util do
   describe 'location of test from stack track' do
+    subject(:util_class) { described_class }
+
     it 'finds the directory' do
-      expect(subject.class.send(:extract_directory)).to match(%r{/rutabaga/spec/rutabaga\Z})
+      expect(util_class.send(:extract_directory)).to match(%r{/rutabaga/spec/rutabaga\Z})
     end
 
     it 'finds the feature' do
-      features = subject.class.send(:extract_features)
+      features = util_class.send(:extract_features)
       expect(features[0]).to match(%r{/rutabaga/spec/rutabaga/util\.feature\Z})
       expect(features[1]).to match(%r{/rutabaga/spec/rutabaga/util\.rutabaga\Z})
     end
   end
 
   describe '.find_feature' do
-    let(:subject) { Rutabaga::Util.find_feature(@description) }
+    subject(:found_feature) { Rutabaga::Util.find_feature(@description) }
 
     before do
       allow(File).to receive(:exist?).with('spec/rutabaga/existing.feature').and_return(true)
@@ -27,7 +29,7 @@ describe Rutabaga::Util do
 
     it 'returns the file if it exists' do
       @description = 'spec/rutabaga/existing.feature'
-      expect(subject).to eq('spec/rutabaga/existing.feature')
+      expect(found_feature).to eq('spec/rutabaga/existing.feature')
     end
 
     describe "looks for the feature in the spec's directory" do
@@ -41,7 +43,7 @@ describe Rutabaga::Util do
           .with(%r{spec/rutabaga/different\.feature\Z})
           .and_return(true)
 
-        expect(subject).to match(%r{spec/rutabaga/different\.feature\Z})
+        expect(found_feature).to match(%r{spec/rutabaga/different\.feature\Z})
       end
 
       it 'allows sub-directories' do
@@ -53,7 +55,7 @@ describe Rutabaga::Util do
           .with(%r{spec/rutabaga/subdirectory/different\.feature\Z})
           .and_return(true)
 
-        expect(subject).to match(%r{spec/rutabaga/subdirectory/different\.feature\Z})
+        expect(found_feature).to match(%r{spec/rutabaga/subdirectory/different\.feature\Z})
       end
     end
 
@@ -62,7 +64,7 @@ describe Rutabaga::Util do
         @description = nil
         allow(File).to receive(:exist?).with(%r{spec/rutabaga/util\.feature\Z})
                                        .and_return(true)
-        expect(subject).to match(%r{spec/rutabaga/util\.feature\Z})
+        expect(found_feature).to match(%r{spec/rutabaga/util\.feature\Z})
       end
 
       it 'description does not match a feature file' do
@@ -72,7 +74,7 @@ describe Rutabaga::Util do
 
         allow(File).to receive(:exist?).with(%r{spec/rutabaga/util\.feature\Z})
                                        .and_return(true)
-        expect(subject).to match(%r{spec/rutabaga/util\.feature\Z})
+        expect(found_feature).to match(%r{spec/rutabaga/util\.feature\Z})
       end
 
       it 'description does not match a feature file' do
@@ -84,28 +86,28 @@ describe Rutabaga::Util do
         allow(File).to receive(:exist?).with(%r{spec/rutabaga/util\.rutabaga\Z})
                                        .and_return(true)
 
-        expect(subject).to match(%r{spec/rutabaga/util\.rutabaga\Z})
+        expect(found_feature).to match(%r{spec/rutabaga/util\.rutabaga\Z})
       end
 
       it 'handles paths with spaces' do
         @description = '/User/person/Internet plugins/feature.feature'
         allow(File).to receive(:exist?).with(@description).and_return(true)
 
-        expect(subject).to eq(@description)
+        expect(found_feature).to eq(@description)
       end
 
       it 'allows the .feature extension' do
         @description = 'example.feature'
         allow(File).to receive(:exist?).with(@description).and_return(true)
 
-        expect(subject).to include(@description)
+        expect(found_feature).to include(@description)
       end
 
       it 'allows the .rutabaga extension' do
         @description = 'example.rutabaga'
         allow(File).to receive(:exist?).with(@description).and_return(true)
 
-        expect(subject).to include(@description)
+        expect(found_feature).to include(@description)
       end
     end
 
@@ -117,26 +119,26 @@ describe Rutabaga::Util do
       it 'has a nil description' do
         @description = nil
 
-        expect { subject }.to raise_error(%r{Feature file not found\. Tried: .*/spec/rutabaga/util\.feature})
+        expect { found_feature }.to raise_error(%r{Feature file not found\. Tried: .*/spec/rutabaga/util\.feature})
       end
 
       it 'has a sentance description' do
         @description = 'my life as a dog'
 
-        expect { subject }.to raise_error(%r{Feature file not found\. Tried: .*/spec/rutabaga/util\.feature})
+        expect { found_feature }.to raise_error(%r{Feature file not found\. Tried: .*/spec/rutabaga/util\.feature})
       end
 
       it "has a filename description but the file doesn't exist" do
         @description = 'example.feature'
 
-        expect { subject }.to raise_error(/Feature file not found\. Tried: example\.feature, .*example\.feature/)
+        expect { found_feature }.to raise_error(/Feature file not found\. Tried: example\.feature, .*example\.feature/)
       end
 
       it 'raises an error if the filename does not end in feature' do
         @description = 'example.other'
         allow(File).to receive(:exist?).with(@description).and_return(true)
 
-        expect { subject }.to raise_error(%r{Feature file not found\. Tried: .*/spec/rutabaga/util\.feature})
+        expect { found_feature }.to raise_error(%r{Feature file not found\. Tried: .*/spec/rutabaga/util\.feature})
       end
     end
   end
