@@ -26,7 +26,7 @@ describe 'integration', type: :integration do
       expect(@result).to include('feature block inside a describe block')
     end
 
-    it 'should not show any pending steps' do
+    it 'does not show any pending steps' do
       expect(@result).not_to include('PENDING')
       expect(@result).not_to include('No such step')
     end
@@ -35,7 +35,7 @@ describe 'integration', type: :integration do
       expect(@result).to include('18 examples, 4 failures')
     end
 
-    it 'should find features relative to the root' do
+    it 'finds features relative to the root' do
       expect(@result).not_to include('Feature file not found')
     end
 
@@ -44,11 +44,11 @@ describe 'integration', type: :integration do
       expect(@result).to include('my result is 8')
     end
 
-    it 'should scope steps to describe blocks' do
+    it 'scopes steps to describe blocks' do
       expect(@result).not_to include('Turnip::Ambiguous')
     end
 
-    it 'should provide failure messages that allow a specific scenario to be run' do
+    it 'provides failure messages that allow a specific scenario to be run' do
       expect(@result).to match(%r{rspec '{0,1}./examples/test_feature_example_group_spec.rb\[1:1:1:4:1\]'{0,1}})
     end
   end

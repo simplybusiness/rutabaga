@@ -8,7 +8,7 @@ require 'rutabaga'
 module Turnip
   module RSpec
     module Loader
-      def load(*a, &)
+      def load(*a, &block)
         if a.first.end_with?('.feature')
           if legal_directories.none? { |d| a.first.end_with? d }
             ::RSpec.warning 'Features can only be called from turnip enable directories. These are configured ' \
@@ -28,7 +28,7 @@ module Turnip
 
       def legal_directories
         @legal_directories ||= ::RSpec.configuration.pattern.split(',')
-                                      .select { |p| /\.feature\Z/ =~ p }
+                                      .grep(/\.feature\Z/)
                                       .map { |d| Dir.glob(File.join(::RSpec.configuration.default_path, d)) }
                                       .flatten
       end

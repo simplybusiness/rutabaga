@@ -1,8 +1,16 @@
 inherit_from: .rubocop_todo.yml
 
 inherit_gem:
-  simplycop: .simplycop.yml
+  simplycop: 
+    - .simplycop.yml
+    - .simplycop_performance.yml
+    - .simplycop_rspec.yml
 
 AllCops:
+  TargetRubyVersion: 3.2
   Exclude:
     - 'vendor/**/*'
+
+RSpec:
+  Exclude:
+    - 'examples/**/*'
