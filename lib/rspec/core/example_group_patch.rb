@@ -11,10 +11,10 @@ module RSpec
     class Configuration
       alias orig_alias_example_group_to alias_example_group_to
 
-      def alias_example_group_to(new_name, *)
+      def alias_example_group_to(new_name, *args)
         return if [:feature, :xfeature, :ffeature].include?(new_name)
 
-        orig_alias_example_group_to(new_name, *)
+        orig_alias_example_group_to(new_name, *args)
       end
     end
   end
@@ -27,10 +27,10 @@ module RSpec
       class << self
         alias orig_subclass subclass
 
-        def subclass(parent, description, *all_args, &)
+        def subclass(parent, description, *all_args, &block)
           rutabaga = all_args.first.any? { |arg| arg.is_a?(Hash) && arg[:rutabaga] }
 
-          orig_subclass(parent, description, *all_args, &).tap do |describe|
+          orig_subclass(parent, description, *all_args, &block).tap do |describe|
             if rutabaga
               Rutabaga::ExampleGroup::Feature.feature(describe, description, all_args.last)
             end
